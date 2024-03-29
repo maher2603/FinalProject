@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Whips&Gigs{% endblock %}</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional CSS styles */
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .bg-theme {
+        background-color: #141414;
+      }
+      /* Modern styling for the login form */
+      .container-full {
+        width: 100vw; /* Set container width to full viewport width */
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .login-content {
+        padding-top: 100px;
+        max-width: 400px;
+        margin: 0 auto; /* Center the content horizontally */
+      }
+      .card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      .card-body {
+        padding: 40px;
+      }
+      .card-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-control {
+        border-radius: 10px;
+        padding: 15px;
+      }
+      .btn-login {
+        width: 100%;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        background-color: #333;
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+      .btn-login:hover {
+        background-color: #555;
+      }
+      .text-center {
+        margin-top: 20px;
+      }
+      .text-center a {
+        color: #333;
+        text-decoration: none;
+      }
+      .text-center a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-theme">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'main_spa' %}">Whips & Gigs</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <script>
+              window.location.href = "http://localhost:5173/";
+            </script>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+    <div class="container-full">
+      <div class="login-content">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Login</h2>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                {{ form.username.label_tag }}
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  placeholder="Username"
+                />
+              </div>
+              <div class="form-group">
+                {{ form.password.label_tag }}
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                />
+              </div>
+              <button type="submit" class="btn btn-login">Login</button>
+            </form>
+            <div class="text-center">
+              <a href="{% url 'signup' %}"
+                >Don't have an account? Signup here</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock content %}
+
+    <!-- Bootstrap JS and its dependencies (Optional, if I want Bootstrap's interactive components, like the collapsible navbar) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

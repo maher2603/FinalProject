@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Whips&Gigs{% endblock %}</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional CSS styles */
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .bg-theme {
+        background-color: #141414;
+      }
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+
+      .container-full {
+        width: 100%;
+        max-width: 100%; /* Ensure the container doesn't exceed the viewport width */
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .login-content {
+        padding-top: 50px;
+        max-width: 400px;
+        margin: 0 auto; /* Center the content horizontally */
+      }
+      .card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+      .card-body {
+        padding: 40px;
+      }
+      .card-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-control {
+        border-radius: 10px;
+        padding: 15px;
+      }
+      .btn-login {
+        width: 100%;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        background-color: #333;
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+      .btn-login:hover {
+        background-color: #555;
+      }
+      .text-center {
+        margin-top: 20px;
+      }
+      .text-center a {
+        color: #333;
+        text-decoration: none;
+      }
+      .text-center a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-theme">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'main_spa' %}">Whips & Gigs</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Welcome, {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <form
+                action="{% url 'logout' %}"
+                method="post"
+                class="form-inline"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success">
+                  Logout
+                </button>
+              </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+    <div class="container-full">
+      <div class="login-content">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">Signup</h2>
+            <form
+              method="post"
+              enctype="multipart/form-data"
+              onsubmit="return validateForm()"
+            >
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  placeholder="Enter your username"
+                  required
+                  minlength="5"
+                />
+                <div class="invalid-feedback">
+                  Please enter a valid username (minimum 5 characters).
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Please enter a valid email address.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dob"
+                  name="dob"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Please enter your date of birth.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password1"
+                  name="password1"
+                  placeholder="Enter your password"
+                  required
+                  minlength="8"
+                />
+                <div class="invalid-feedback">
+                  Please enter a valid password (minimum 8 characters).
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password2"
+                  name="password2"
+                  placeholder="Confirm your password"
+                  required
+                  minlength="8"
+                />
+                <div class="invalid-feedback">
+                  Please confirm your password.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-dark btn-login">
+                Signup
+              </button>
+            </form>
+            <div class="text-center mt-3">
+              <a href="{% url 'login' %}"
+                >Already have an account? Login here</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock content %}
+
+    <footer class="footer bg-burgundy text-white mt-4">
+      <div class="container text-center py-3">
+        <!-- Footer content here -->
+        &copy; {{ current_year }} Whips&Gigs
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS and its dependencies (Optional, if I want Bootstrap's interactive components, like the collapsible navbar) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function validateForm() {
+        var password1 = document.getElementById("password1").value;
+        var password2 = document.getElementById("password2").value;
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var commonPasswords = ["password", "123456", "qwerty", "abc123"]; // List of common passwords
+
+        // Check if password2 matches password1
+        if (password1 !== password2) {
+          alert("Passwords do not match.");
+          return false;
+        }
+
+        // Check if password is too similar to username or email
+        if (password1.includes(username) || password1.includes(email)) {
+          alert(
+            "Your password can't be too similar to your username or email."
+          );
+          return false;
+        }
+
+        // Check if password meets length requirement
+        if (password1.length < 8) {
+          alert("Your password must contain at least 8 characters.");
+          return false;
+        }
+
+        // Check if password is a commonly used password
+        if (commonPasswords.includes(password1)) {
+          alert("Your password can't be a commonly used password.");
+          return false;
+        }
+
+        // Check if password is entirely numeric
+        if (!isNaN(password1)) {
+          alert("Your password can't be entirely numeric.");
+          return false;
+        }
+
+        return true; // Form submission allowed if all conditions are met
+      }
+    </script>
+  </body>
+</html>

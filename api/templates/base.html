@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Whips&Gigs{% endblock %}</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional CSS styles */
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .bg-theme {
+        background-color: #141414;
+      }
+      /* Animated background */
+      body {
+        overflow: hidden;
+        position: relative;
+        background-color: #141414;
+        animation: changeColor 10s infinite alternate;
+      }
+      @keyframes changeColor {
+        0% {
+          background-color: #141414;
+        }
+        50% {
+          background-color: #333;
+        }
+        100% {
+          background-color: #141414;
+        }
+      }
+      /* Modern styling for the main content */
+      .main-content {
+        padding: 100px 0;
+        text-align: center;
+        color: #fff;
+      }
+      .main-content h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+      .main-content p {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+      }
+      /* Description section */
+      .description-section {
+        background-color: #f8f9fa; /* Light gray background */
+        padding: 50px 0;
+        text-align: center;
+        height: 100vh; /* Make section fill viewport height */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-theme">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'main_spa' %}">Whips & Gigs</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <script>
+              window.location.href = "http://localhost:5173/";
+            </script>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Main content area -->
+    <div class="container">
+      <div class="row justify-content-center main-content">
+        <div class="col-md-8">
+          <h1>Welcome to Whips&Gigs</h1>
+          <p>Your destination for all things vehicles!</p>
+        </div>
+      </div>
+    </div>
+    <!-- Description section -->
+    <div class="description-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>What We Offer</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              tincidunt sit amet odio vitae bibendum. Duis dignissim lacus eget
+              dolor dictum, et malesuada felis condimentum.
+            </p>
+            <p>
+              Nullam id quam ac quam aliquet auctor. Proin eget risus vitae urna
+              laoreet mattis in at velit. Phasellus porttitor gravida libero,
+              non scelerisque sapien porttitor at.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
