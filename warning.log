@@ -1242,3 +1242,8 @@ Traceback (most recent call last):
     return self.connection.commit()
 django.db.utils.IntegrityError: FOREIGN KEY constraint failed
 Internal Server Error: /get-vehicles/
+Internal Server Error: /remove-vehicle/1/
+Internal Server Error: /remove-vehicle/1/
+Internal Server Error: /remove-vehicle/1/
+Internal Server Error: /remove-vehicle/1/
+Not Found: /remove-vehicle/6/

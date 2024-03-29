@@ -68,9 +68,9 @@ interface SearchResult {
   fuelType: string;
   engineCapacity: number;
   taxStatus: string;
-  taxDueDate: date;
+  taxDueDate: string;
   motStatus: string;
-  motExpiryDate: date;
+  motExpiryDate: string;
 }
 
 export default {
@@ -89,34 +89,7 @@ export default {
       searchResult: null as SearchResult | null,
     };
   },
-  mounted() {
-    this.fetchUserProfile();
-  },
   methods: {
-    async fetchUserProfile() {
-      try {
-        const response = await fetch("http://localhost:8000/user-api/", {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (response.ok) {
-          const userData = (await response.json()) as UserData;
-          this.user = userData;
-          if (userData.profileImage) {
-            userData.profileImage = `http://localhost:8000/${userData.profileImage}`;
-          }
-        } else {
-          console.error(
-            "Failed to fetch user data:",
-            response.status,
-            response.statusText
-          );
-        }
-      } catch (error) {
-        console.error("Error during fetch:", error);
-      }
-    },
     async searchVehicle() {
       this.loading = true;
       try {
@@ -170,6 +143,8 @@ export default {
           this.$emit("vehicle-added", this.searchResult);
           this.registrationNumber = "";
           this.searchResult = null;
+          // Reload the page
+          window.location.reload();
         } catch (error) {
           this.error = "Failed to add vehicle";
         }

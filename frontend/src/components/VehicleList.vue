@@ -69,16 +69,17 @@
 import { defineComponent, PropType } from "vue";
 
 interface Vehicle {
-  registrationNumber: string;
+  id: number;
+  registration_number: string;
   make: string;
   colour: string;
-  yearOfManufacture: number;
-  fuelType: string;
-  engineCapacity: number;
-  taxStatus: string;
-  taxDueDate: string; // Update date to string type
-  motStatus: string;
-  motExpiryDate: string; // Update date to string type
+  year_of_manufacture: number;
+  fuel_type: string;
+  engine_capacity: number;
+  tax_status: string;
+  tax_due_date: string;
+  mot_status: string;
+  mot_expiry_date: string;
 }
 
 export default defineComponent({
@@ -117,7 +118,30 @@ export default defineComponent({
       }
     },
     removeVehicle(index: number) {
-      this.$emit("remove-vehicle", index);
+      const vehicleToRemove = this.vehicles[index];
+
+      // Send a DELETE request to the backend API to remove the vehicle
+      fetch(`http://localhost:8000/remove-vehicle/${vehicleToRemove.id}/`, {
+        method: "DELETE",
+        credentials: "include",
+      })
+        .then((response) => {
+          if (response.ok) {
+            // If the request is successful, emit an event to notify the parent component
+            this.$emit("vehicle-removed", index);
+            // Reload the page
+            window.location.reload();
+          } else {
+            console.error(
+              "Failed to remove vehicle:",
+              response.status,
+              response.statusText
+            );
+          }
+        })
+        .catch((error) => {
+          console.error("Error during remove vehicle request:", error);
+        });
     },
   },
 });

@@ -45,9 +45,9 @@ interface Vehicle {
   fuelType: string;
   engineCapacity: number;
   taxStatus: string;
-  taxDueDate: date;
+  taxDueDate: string;
   motStatus: string;
-  motExpiryDate: data;
+  motExpiryDate: string;
 }
 
 export default defineComponent({

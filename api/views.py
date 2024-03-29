@@ -199,16 +199,35 @@ def get_vehicles(request: HttpRequest) -> JsonResponse:
     if request.method == 'GET':
         try:
             # Retrieve all vehicles associated with the logged-in user
-            print("In the try catch")
             vehicles = Vehicle.objects.filter(user_id=request.user)
             # Convert queryset to list of dictionaries
-            print(vehicles)
-            print("after vehicles")
+            print(vehicles) #for debugging
             vehicle_data = [vehicle.to_dict() for vehicle in vehicles]
             # Return the list of vehicle data as a JSON response
-            print(vehicle_data)
-            print("after vehicle data")
+            print(vehicle_data) #for debugging
             return JsonResponse(vehicle_data, safe=False)  # Set safe=False for serialization of lists
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def remove_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
+    """
+    Removes the specified vehicle associated with the logged-in user.
+    """
+    if request.method == 'DELETE':
+        try:
+            print("after try")
+            # Retrieve the vehicle associated with the logged-in user and the given vehicle_id
+            vehicle = Vehicle.objects.get(user_id=request.user, id=vehicle_id)
+            print("after vehicle")
+            # Delete the vehicle
+            vehicle.delete()
+            return JsonResponse({'message': 'Vehicle removed successfully'}, status=200)
+        except Vehicle.DoesNotExist:
+            return JsonResponse({'error': 'Vehicle not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     else:
