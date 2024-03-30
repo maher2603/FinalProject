@@ -6,6 +6,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import MainPage from "../pages/MainPage.vue";
 import ProfilePage from "../pages/ProfilePage.vue";
 import VehiclePage from "../pages/VehiclePage.vue";
+import LogPage from "../pages/LogPage.vue";
 import ForumPage from "../pages/ForumPage.vue";
 
 let base =
@@ -18,6 +19,7 @@ const router = createRouter({
     { path: "/", name: "Main Page", component: MainPage },
     { path: "/profile/", name: "Profile Page", component: ProfilePage },
     { path: "/garage/", name: "Vehicle Page", component: VehiclePage },
+    { path: "/garage/logs/:vehicleId", name: "Log Page", component: LogPage },
     { path: "/forum/", name: "Forum Page", component: ForumPage },
   ],
 });

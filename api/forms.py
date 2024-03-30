@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import Vehicle
+from .models import Vehicle, VehicleLog
 
 User = get_user_model()
 
@@ -21,3 +21,8 @@ class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
         fields = ['user_id', 'registration_number', 'make', 'colour', 'year_of_manufacture', 'fuel_type', 'engine_capacity', 'tax_status', 'tax_due_date', 'mot_status', 'mot_expiry_date']
+
+class VehicleLogForm(forms.ModelForm):
+    class Meta:
+        model = VehicleLog
+        fields = ['vehicle_id', 'title', 'date', 'cost', 'description', 'file_upload']

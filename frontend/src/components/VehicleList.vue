@@ -57,6 +57,9 @@
           </div>
         </div>
         <button class="btn-remove" @click="removeVehicle(index)">Remove</button>
+        <button class="btn-logs" @click="viewLogs(vehicle.id)">
+          View Logs
+        </button>
       </div>
     </div>
     <div v-else>
@@ -86,6 +89,10 @@ export default defineComponent({
   props: {
     vehicles: {
       type: Array as PropType<Vehicle[]>,
+      required: true,
+    },
+    vehicleId: {
+      type: Number,
       required: true,
     },
   },
@@ -120,28 +127,38 @@ export default defineComponent({
     removeVehicle(index: number) {
       const vehicleToRemove = this.vehicles[index];
 
-      // Send a DELETE request to the backend API to remove the vehicle
-      fetch(`http://localhost:8000/remove-vehicle/${vehicleToRemove.id}/`, {
-        method: "DELETE",
-        credentials: "include",
-      })
-        .then((response) => {
-          if (response.ok) {
-            // If the request is successful, emit an event to notify the parent component
-            this.$emit("vehicle-removed", index);
-            // Reload the page
-            window.location.reload();
-          } else {
-            console.error(
-              "Failed to remove vehicle:",
-              response.status,
-              response.statusText
-            );
-          }
+      // Display a confirmation dialog before proceeding with deletion
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this vehicle?"
+      );
+
+      if (confirmDelete) {
+        // If user confirms deletion, send a DELETE request to the backend API to remove the vehicle
+        fetch(`http://localhost:8000/remove-vehicle/${vehicleToRemove.id}/`, {
+          method: "DELETE",
+          credentials: "include",
         })
-        .catch((error) => {
-          console.error("Error during remove vehicle request:", error);
-        });
+          .then((response) => {
+            if (response.ok) {
+              // If the request is successful, emit an event to notify the parent component
+              this.$emit("vehicle-removed", index);
+              // Reload the page
+              window.location.reload();
+            } else {
+              console.error(
+                "Failed to remove vehicle:",
+                response.status,
+                response.statusText
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Error during remove vehicle request:", error);
+          });
+      }
+    },
+    async viewLogs(vehicleId: number) {
+      this.$emit("view-logs", vehicleId);
     },
   },
 });
@@ -179,13 +196,27 @@ export default defineComponent({
   color: white;
   border: none;
   padding: 10px 20px;
+  padding-right: 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.btn-logs {
+  background-color: #060606;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 .btn-remove:hover {
   background-color: #ff0000;
+}
+
+.btn-logs:hover {
+  background-color: #707070;
 }
 
 .start-text {

@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, VehicleForm
+from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import JsonResponse
@@ -201,10 +201,10 @@ def get_vehicles(request: HttpRequest) -> JsonResponse:
             # Retrieve all vehicles associated with the logged-in user
             vehicles = Vehicle.objects.filter(user_id=request.user)
             # Convert queryset to list of dictionaries
-            print(vehicles) #for debugging
+            #print(vehicles) #for debugging
             vehicle_data = [vehicle.to_dict() for vehicle in vehicles]
             # Return the list of vehicle data as a JSON response
-            print(vehicle_data) #for debugging
+            #print(vehicle_data) #for debugging
             return JsonResponse(vehicle_data, safe=False)  # Set safe=False for serialization of lists
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
@@ -219,10 +219,8 @@ def remove_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
     """
     if request.method == 'DELETE':
         try:
-            print("after try")
             # Retrieve the vehicle associated with the logged-in user and the given vehicle_id
             vehicle = Vehicle.objects.get(user_id=request.user, id=vehicle_id)
-            print("after vehicle")
             # Delete the vehicle
             vehicle.delete()
             return JsonResponse({'message': 'Vehicle removed successfully'}, status=200)
@@ -230,5 +228,50 @@ def remove_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
             return JsonResponse({'error': 'Vehicle not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@csrf_exempt
+@login_required
+def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
+    if request.method == 'POST':
+        print("Reached views.py")
+        if request.user.is_authenticated:
+            print("is authenticated")
+            try:
+                data = json.loads(request.body.decode('utf-8'))
+                print("past data")
+                print(data)
+                title = data.get('title', '')
+                date = parse_date(data.get('date'))
+                cost = data.get('cost', 0)
+                description = data.get('description', '')
+                file_upload = request.FILES.get('file_upload', None)
+
+                form = VehicleLogForm({
+                    'vehicle_id': vehicle_id,
+                    'title': title,
+                    'date': date,
+                    'cost': cost,
+                    'description': description,
+                    'file_upload': file_upload
+                })
+
+                if form.is_valid():
+                    form.save()
+                    return JsonResponse({'message': 'Vehicle log added successfully'}, status=201)
+                else:
+                    return JsonResponse({'errors': form.errors}, status=400)
+
+            except json.JSONDecodeError as e:
+                return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+
+            except ValueError as e:
+                return JsonResponse({'error': str(e)}, status=400)  # Handle invalid date format
+            
+            except Exception as e:
+                return JsonResponse({'error': str(e)}, status=500)
+        else:
+            return JsonResponse({'error': 'User is not authenticated'}, status=401)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)

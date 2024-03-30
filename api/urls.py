@@ -15,6 +15,7 @@ urlpatterns = [
     path('add-vehicle/', views.add_vehicle, name='add_vehicle'),
     path('get-vehicles/', views.get_vehicles, name='get_vehicles'),
     path('remove-vehicle/<int:vehicle_id>/', views.remove_vehicle, name='remove_vehicle'),
+    path('add-vehicle-log/<int:vehicle_id>/', views.add_vehicle_log, name='add_vehicle_log'),    
 ]
 
 if settings.DEBUG:

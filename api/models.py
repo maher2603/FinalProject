@@ -65,8 +65,31 @@ class Vehicle(models.Model):
             'fuel_type': self.fuel_type,
             'engine_capacity': self.engine_capacity,
             'tax_status': self.tax_status,
-            'tax_due_date': self.tax_due_date.strftime('%Y-%m-%d'),  # Convert date to string
+            'tax_due_date': self.tax_due_date.strftime('%Y-%m-%d'),
             'mot_status': self.mot_status,
-            'mot_expiry_date': self.mot_expiry_date.strftime('%Y-%m-%d'),  # Convert date to string
+            'mot_expiry_date': self.mot_expiry_date.strftime('%Y-%m-%d'),
+        }
+        return data
+    
+class VehicleLog(models.Model):
+    vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    date = models.DateField()
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField()
+    file_upload = models.FileField(upload_to='additional_data_files/', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.vehicle_id}"
+    
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'vehicle_id': self.vehicle_id.id,
+            'title': self.title,
+            'date': self.date,
+            'cost': self.cost,
+            'description': self.description,
+            'file_upload': self.file_upload,
         }
         return data

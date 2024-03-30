@@ -131,8 +131,6 @@ export default {
           mot_expiry_date: this.searchResult.motExpiryDate,
         };
 
-        this.showVehicle();
-
         try {
           const response = await axios.post(
             "http://localhost:8000/add-vehicle/",

@@ -23,6 +23,7 @@
               <VehicleList
                 :vehicles="vehicles"
                 @update-vehicles="handleUpdateVehicles"
+                @view-logs="viewLogs"
               />
             </div>
           </div>
@@ -34,10 +35,12 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 import VehicleList from "@/components/VehicleList.vue";
 import VehicleSearch from "@/components/VehicleSearch.vue";
 
 interface Vehicle {
+  id: number;
   make: string;
   colour: string;
   registrationNumber: string;
@@ -57,6 +60,15 @@ export default defineComponent({
   },
   setup() {
     const addedVehicles = ref<Vehicle[]>([]);
+    const vehicleId = ref<number>(0);
+
+    const router = useRouter();
+
+    const viewLogs = (id: number) => {
+      vehicleId.value = id;
+      console.log({ vehicleId: id });
+      router.push({ name: "Log Page", params: { vehicleId: id } });
+    };
 
     const addVehicle = (vehicle: Vehicle) => {
       addedVehicles.value.push(vehicle);
@@ -65,17 +77,17 @@ export default defineComponent({
     return {
       addedVehicles,
       addVehicle,
+      viewLogs,
     };
   },
   data() {
     return {
-      vehicles: [] as Vehicle[], // Initialize vehicles array
+      vehicles: [] as Vehicle[],
     };
   },
   methods: {
-    // Method to handle the updated vehicles data
     handleUpdateVehicles(data: Vehicle[]) {
-      this.vehicles = data; // Update vehicles data
+      this.vehicles = data;
     },
   },
 });
