@@ -1310,3 +1310,42 @@ Bad Request: /add-vehicle-log/13/
 Bad Request: /add-vehicle-log/13/
 Bad Request: /add-vehicle-log/13/
 Bad Request: /add-vehicle-log/13/
+Bad Request: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Method Not Allowed: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Internal Server Error: /add-vehicle-log/17/
+Internal Server Error: /add-vehicle-log/17/
+Not Found: /get-vehicle-logs/13
+Internal Server Error: /get-vehicle-logs/13/
+Internal Server Error: /get-vehicle-logs/13/
+Internal Server Error: /get-vehicle-logs/13/
+Internal Server Error: /get-vehicle-logs/13/
+Internal Server Error: /get-vehicle-logs/13/
+Internal Server Error: /get-vehicle-logs/13/
+Internal Server Error: /get-vehicle-logs/17/
+Not Found: /delete-vehicle-log/undefined/
+Internal Server Error: /delete-vehicle-log/2/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+TypeError: delete_vehicle_log() got an unexpected keyword argument 'vehicle_id'
+Internal Server Error: /delete-vehicle-log/2/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+TypeError: delete_vehicle_log() got an unexpected keyword argument 'vehicle_id'

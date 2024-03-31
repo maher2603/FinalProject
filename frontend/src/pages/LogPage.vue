@@ -18,7 +18,14 @@
           <!-- ViewLogs component to view all logs for vehicle -->
           <div class="profile-container">
             <div class="profile-header bg-gradient rounded-top">
-              <h2 class="profile-title text-black">Vehicle Logs</h2>
+              <h2 class="profile-title text-black">
+                {{
+                  vehicle.length > 0
+                    ? vehicle[0].registration_number
+                    : "Vehicle"
+                }}
+                Service Logs
+              </h2>
             </div>
             <div class="card-body">
               <!-- Pass the vehicleId as a prop to ViewLogs component -->
@@ -37,10 +44,29 @@ import { useRoute } from "vue-router";
 import ViewLogs from "@/components/ViewLogs.vue";
 import AddLog from "@/components/AddLog.vue";
 
+interface Vehicle {
+  id: number;
+  make: string;
+  colour: string;
+  registration_number: string;
+  year_of_manufacture: number;
+  fuel_type: string;
+  engine_capacity: number;
+  tax_status: string;
+  tax_due_date: string;
+  mot_status: string;
+  mot_expiry_date: string;
+}
+
 export default defineComponent({
   components: {
     ViewLogs,
     AddLog,
+  },
+  data() {
+    return {
+      vehicle: [] as Vehicle[],
+    };
   },
   setup() {
     const route = useRoute();
@@ -53,6 +79,43 @@ export default defineComponent({
     });
 
     return { vehicleId };
+  },
+  mounted() {
+    this.getVehicle();
+  },
+  methods: {
+    async getVehicle() {
+      try {
+        // Fetch vehicles data from the backend API
+        const response = await fetch(
+          `http://localhost:8000/get-vehicle/${this.vehicleId}/`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        if (response.ok) {
+          // Parse response data as JSON
+          const data = await response.json();
+          this.vehicle = data;
+          console.log(this.vehicle);
+        } else {
+          console.error(
+            "Failed to fetch vehicles data:",
+            response.status,
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Error during fetch:", error);
+      }
+    },
+  },
+  props: {
+    vehicleId: {
+      type: String,
+      required: true,
+    },
   },
 });
 </script>

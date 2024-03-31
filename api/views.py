@@ -7,7 +7,7 @@ from django.http import JsonResponse
 import json
 from django.http import HttpRequest, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Vehicle
+from .models import Vehicle, VehicleLog
 from django.contrib.auth.models import User
 import requests, datetime
 from django.utils.dateparse import parse_date
@@ -213,6 +213,27 @@ def get_vehicles(request: HttpRequest) -> JsonResponse:
     
 @csrf_exempt
 @login_required
+def get_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
+    """
+    Retrieves all vehicles associated with the logged-in user.
+    """
+    if request.method == 'GET':
+        try:
+            # Retrieve all vehicles associated with the logged-in user
+            vehicles = Vehicle.objects.filter(user_id=request.user, id=vehicle_id)
+            # Convert queryset to list of dictionaries
+            #print(vehicles) #for debugging
+            vehicle_data = [vehicle.to_dict() for vehicle in vehicles]
+            # Return the list of vehicle data as a JSON response
+            #print(vehicle_data) #for debugging
+            return JsonResponse(vehicle_data, safe=False)  # Set safe=False for serialization of lists
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
 def remove_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
     """
     Removes the specified vehicle associated with the logged-in user.
@@ -238,8 +259,9 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
         print("Reached views.py")
         if request.user.is_authenticated:
             print("is authenticated")
+            print(request.POST)
             try:
-                data = json.loads(request.body.decode('utf-8'))
+                data = request.POST
                 print("past data")
                 print(data)
                 title = data.get('title', '')
@@ -273,5 +295,34 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
                 return JsonResponse({'error': str(e)}, status=500)
         else:
             return JsonResponse({'error': 'User is not authenticated'}, status=401)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def get_vehicle_logs(request, vehicle_id):
+    if request.method == 'GET':
+        try:
+            logs = VehicleLog.objects.filter(vehicle_id=vehicle_id).values('id', 'title', 'date', 'cost', 'description')
+            return JsonResponse(list(logs), safe=False)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def delete_vehicle_log(request, log_id):
+    if request.method == 'DELETE':
+        try:
+            # Retrieve the log associated with the logged-in user and the given log_id
+            log = VehicleLog.objects.get(id=log_id)
+            # Delete the log
+            log.delete()
+            return JsonResponse({'message': 'Log deleted successfully'}, status=200)
+        except VehicleLog.DoesNotExist:
+            return JsonResponse({'error': 'Log not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)

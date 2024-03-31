@@ -26,10 +26,11 @@
           <label class="form-label" for="cost">Cost (£)</label>
           <input
             name="cost"
-            type="number"
+            type="text"
             class="form-control mb-3"
             v-model="cost"
             required
+            pattern="^\d+(\.\d{1,2})?$"
           />
         </div>
         <div class="form-group">
@@ -88,28 +89,34 @@ export default defineComponent({
     },
     async submitLog() {
       this.loading = true;
+
       const formData = new FormData();
       formData.append("title", this.title);
       formData.append("date", this.date);
       formData.append("cost", this.cost);
       formData.append("description", this.description);
+
       if (this.file) {
         formData.append("file", this.file);
       }
+
       try {
         console.log(this.vehicleId);
         console.log(formData);
+
         const response = await fetch(
           `http://localhost:8000/add-vehicle-log/${this.vehicleId}/`,
           {
             method: "POST",
             credentials: "include",
-            body: formData, // Include the formData in the request body
+            body: formData,
           }
         );
+
         if (response.ok) {
           // Parse response data as JSON
           console.log(response);
+          window.location.reload();
         } else {
           console.error(
             "Failed to submit log:",
@@ -117,6 +124,7 @@ export default defineComponent({
             response.statusText
           );
         }
+
         // Reset form fields
         this.title = "";
         this.date = "";
