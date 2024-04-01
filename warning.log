@@ -1349,3 +1349,102 @@ Traceback (most recent call last):
   File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
     return view_func(request, *args, **kwargs)
 TypeError: delete_vehicle_log() got an unexpected keyword argument 'vehicle_id'
+Internal Server Error: /vehicle-search/
+Internal Server Error: /vehicle-search/
+Internal Server Error: /admin/api/vehiclelog/7/change/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 313, in _commit
+    return self.connection.commit()
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\views\decorators\cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\options.py", line 1889, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\transaction.py", line 263, in __exit__
+    connection.commit()
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 337, in commit
+    self._commit()
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 313, in _commit
+    return self.connection.commit()
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 313, in _commit
+    return self.connection.commit()
+django.db.utils.IntegrityError: FOREIGN KEY constraint failed
+Method Not Allowed: /add-vehicle-log/17/
+Internal Server Error: /admin/api/vehiclelog/19/change/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 313, in _commit
+    return self.connection.commit()
+sqlite3.IntegrityError: FOREIGN KEY constraint failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\options.py", line 688, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\views\decorators\cache.py", line 62, in _wrapper_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\sites.py", line 242, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\options.py", line 1889, in change_view
+    return self.changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\decorators.py", line 46, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\decorators.py", line 134, in _wrapper_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\admin\options.py", line 1747, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\transaction.py", line 263, in __exit__
+    connection.commit()
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 337, in commit
+    self._commit()
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 313, in _commit
+    return self.connection.commit()
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\db\backends\base\base.py", line 313, in _commit
+    return self.connection.commit()
+django.db.utils.IntegrityError: FOREIGN KEY constraint failed
+Internal Server Error: /add-vehicle-log/17/
+Internal Server Error: /add-vehicle-log/17/
+Internal Server Error: /add-vehicle-log/17/
+Internal Server Error: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Bad Request: /add-vehicle-log/17/
+Internal Server Error: /add-vehicle-log/17/
+Not Found: /29/download/
+Not Found: /media/additional_data_files/29/
+Not Found: /media/additional_data_files/additional_data_files/Peer_Review_Form_ECS661.pdf/
+Not Found: /media/additional_data_files/additional_data_files/Peer_Review_Form_ECS661.pdf/

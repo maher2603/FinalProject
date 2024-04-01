@@ -44,17 +44,23 @@
           ></textarea>
         </div>
         <div class="form-group text-center">
-          <label class="file-upload-label" :class="{ 'file-selected': file }">
+          <label
+            class="file-upload-label"
+            :class="{ 'file-selected': file_upload }"
+          >
             <input
               name="upload"
               type="file"
               class="file-upload-input"
               @change="handleFileChange"
+              accept=".pdf,.jpg,.jpeg,.png"
             />
             <i class="fas fa-cloud-upload-alt"></i>
-            <span class="file-upload-text" :class="{ 'file-selected': file }">{{
-              file ? file.name : "Choose a file"
-            }}</span>
+            <span
+              class="file-upload-text"
+              :class="{ 'file-selected': file_upload }"
+              >{{ file_upload ? file_upload.name : "Choose a file" }}</span
+            >
           </label>
         </div>
         <button type="submit" class="btn btn-gradient btn-lg btn-block">
@@ -69,7 +75,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-// import axios from "axios";
 
 export default defineComponent({
   data() {
@@ -78,14 +83,27 @@ export default defineComponent({
       date: "",
       cost: "",
       description: "",
-      file: null,
+      file_upload: null,
       loading: false,
       error: "",
     };
   },
   methods: {
     handleFileChange(event: any) {
-      this.file = event.target.files[0];
+      const file = event.target.files[0];
+      const allowedExtensions = ["pdf", "jpg", "jpeg", "png"];
+      const extension = file.name.split(".").pop().toLowerCase();
+
+      // Check if the selected file has an allowed extension
+      if (!allowedExtensions.includes(extension)) {
+        alert("Only .pdf, .jpg, .jpeg, or .png files are allowed.");
+        // Clear the input value to prevent submitting the form with an invalid file
+        event.target.value = "";
+        this.file_upload = null; // Reset file_upload
+        return;
+      }
+
+      this.file_upload = file;
     },
     async submitLog() {
       this.loading = true;
@@ -96,8 +114,8 @@ export default defineComponent({
       formData.append("cost", this.cost);
       formData.append("description", this.description);
 
-      if (this.file) {
-        formData.append("file", this.file);
+      if (this.file_upload) {
+        formData.append("file_upload", this.file_upload);
       }
 
       try {
@@ -130,7 +148,7 @@ export default defineComponent({
         this.date = "";
         this.cost = "";
         this.description = "";
-        this.file = null;
+        this.file_upload = null;
         this.loading = false;
         this.error = "";
       } catch (error) {

@@ -56,10 +56,14 @@
             <span class="info-value">Expired </span>
           </div>
         </div>
-        <button class="btn-remove" @click="removeVehicle(index)">Remove</button>
-        <button class="btn-logs" @click="viewLogs(vehicle.id)">
-          View Logs
-        </button>
+        <div class="btn-group">
+          <button class="btn btn-remove" @click="removeVehicle(index)">
+            Remove
+          </button>
+          <button class="btn btn-logs" @click="viewLogs(vehicle.id)">
+            View Logs
+          </button>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -195,8 +199,7 @@ export default defineComponent({
   background-color: #c60000;
   color: white;
   border: none;
-  padding: 10px 20px;
-  padding-right: 20px;
+  padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -206,7 +209,7 @@ export default defineComponent({
   background-color: #060606;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;

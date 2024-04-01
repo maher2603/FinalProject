@@ -262,13 +262,16 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
             print(request.POST)
             try:
                 data = request.POST
+                files = request.FILES
                 print("past data")
                 print(data)
                 title = data.get('title', '')
                 date = parse_date(data.get('date'))
                 cost = data.get('cost', 0)
                 description = data.get('description', '')
-                file_upload = request.FILES.get('file_upload', None)
+                file_upload = files.get('file_upload', None)
+
+                print(file_upload)
 
                 form = VehicleLogForm({
                     'vehicle_id': vehicle_id,
@@ -276,8 +279,8 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
                     'date': date,
                     'cost': cost,
                     'description': description,
-                    'file_upload': file_upload
-                })
+                }, files)
+                print("after form")
 
                 if form.is_valid():
                     form.save()
@@ -289,7 +292,7 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
                 return JsonResponse({'error': 'Invalid JSON data'}, status=400)
 
             except ValueError as e:
-                return JsonResponse({'error': str(e)}, status=400)  # Handle invalid date format
+                return JsonResponse({'error': str(e)}, status=400) 
             
             except Exception as e:
                 return JsonResponse({'error': str(e)}, status=500)
@@ -303,7 +306,7 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
 def get_vehicle_logs(request, vehicle_id):
     if request.method == 'GET':
         try:
-            logs = VehicleLog.objects.filter(vehicle_id=vehicle_id).values('id', 'title', 'date', 'cost', 'description')
+            logs = VehicleLog.objects.filter(vehicle_id=vehicle_id).values('id', 'title', 'date', 'cost', 'description', 'file_upload')
             return JsonResponse(list(logs), safe=False)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)

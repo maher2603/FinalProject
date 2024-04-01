@@ -17,7 +17,18 @@
             <span class="info-label">Description:</span> {{ log.description }}
           </div>
         </div>
-        <button @click="deleteLog(log.id)" class="btn-remove">Delete</button>
+        <div class="btn-group">
+          <div class="btn">
+            <button @click="deleteLog(log.id)" class="btn btn-remove">
+              Delete
+            </button>
+          </div>
+          <div class="btn" v-if="log.file_upload">
+            <button @click="downloadFile(log.file_url)" class="btn btn-file">
+              View File
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -35,6 +46,8 @@ interface Log {
   date: string;
   cost: number;
   description: string;
+  file_upload: string;
+  file_url: string;
 }
 
 export default defineComponent({
@@ -45,11 +58,12 @@ export default defineComponent({
     };
   },
   computed: {
-    totalCost(): number {
-      return this.logs.reduce(
+    totalCost(): string {
+      const total = this.logs.reduce(
         (total, log) => total + parseFloat(String(log.cost)),
         0
       );
+      return total.toFixed(2); // Round to two decimal places
     },
   },
   async mounted() {
@@ -67,9 +81,15 @@ export default defineComponent({
           }
         );
         if (response.ok) {
-          const logs = await response.json(); // Parse the response JSON data
-          this.logs = logs;
-          console.log(this.logs);
+          const logs = await response.json();
+          this.logs = logs
+            .map((log: Log) => ({
+              ...log,
+              file_url: `http://localhost:8000/media/${log.file_upload}/`,
+            }))
+            .sort((a, b) => {
+              return new Date(b.date).getTime() - new Date(a.date).getTime();
+            });
         } else {
           console.error(
             "Failed to fetch logs:",
@@ -108,6 +128,9 @@ export default defineComponent({
         }
       }
     },
+    downloadFile(file_url: string) {
+      window.open(file_url, "_blank");
+    },
   },
   props: {
     vehicleId: {
@@ -145,23 +168,26 @@ export default defineComponent({
   font-weight: bold;
 }
 
+.btn {
+  padding: 0px;
+  padding-right: 20px;
+  border: none;
+}
+
 .btn-remove {
   background-color: #c60000;
   color: white;
   border: none;
-  padding: 10px 20px;
-  padding-right: 20px;
-  border-radius: 5px;
+  padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.btn-logs {
+.btn-file {
   background-color: #060606;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -169,7 +195,7 @@ export default defineComponent({
   background-color: #ff0000;
 }
 
-.btn-logs:hover {
+.btn-file:hover {
   background-color: #707070;
 }
 

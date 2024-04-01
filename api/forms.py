@@ -26,3 +26,6 @@ class VehicleLogForm(forms.ModelForm):
     class Meta:
         model = VehicleLog
         fields = ['vehicle_id', 'title', 'date', 'cost', 'description', 'file_upload']
+        
+    # file_upload = forms.FileField()
+    widgets = {'file_upload': forms.FileInput(attrs={'required': False})}
