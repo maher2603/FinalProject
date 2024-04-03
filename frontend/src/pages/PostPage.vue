@@ -3,7 +3,7 @@
     <div class="container">
       <button @click="backToForum" class="btn btn-back">Back to forum</button>
       <div class="row justify-content-center">
-        <div class="col-lg-8 mb-4">
+        <div class="col-md-8 col-lg-6 mb-4">
           <div class="profile-container">
             <div class="profile-header bg-gradient rounded-top">
               <h2 class="profile-title text-black">
@@ -27,12 +27,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 col-lg-6 mb-4">
           <div class="profile-container">
             <div class="profile-header bg-gradient rounded-top">
               <h2 class="profile-title text-black">Comments</h2>
             </div>
-            <div></div>
+            <Comments class="form-control" :postId="postId" />
           </div>
         </div>
       </div>
@@ -43,6 +43,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useRoute } from "vue-router";
+import Comments from "@/components/Comments.vue";
 
 interface Post {
   id: number;
@@ -52,10 +53,11 @@ interface Post {
   description: string;
   date_posted: string;
   image_upload: string;
+  comments: Comment[];
 }
 
 export default defineComponent({
-  components: {},
+  components: { Comments },
   data() {
     return {
       post: {} as Post,
@@ -200,5 +202,22 @@ export default defineComponent({
 
 .post-description {
   padding: 20px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.comment-form button {
+  display: block;
+  margin-left: auto;
+}
+.comments-list .comment-item {
+  margin-bottom: 10px;
+}
+.comment-item .comment-meta {
+  font-size: 14px;
+  color: #777;
 }
 </style>

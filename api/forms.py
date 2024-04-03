@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import Vehicle, VehicleLog, Post
+from .models import Vehicle, VehicleLog, Post, Comment
 
 User = get_user_model()
 
@@ -36,3 +36,8 @@ class PostForm(forms.ModelForm):
         fields = ['user_id', 'title', 'description', 'image_upload']
         
     widgets = {'image_upload': forms.FileInput(attrs={'required': False})}
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields= {'user_id', 'post_id', 'comment'}

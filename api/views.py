@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm
+from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm, CommentForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import JsonResponse
@@ -413,6 +413,43 @@ def delete_post(request, post_id):
             return JsonResponse({'message': 'Post deleted successfully'}, status=200)
         except VehicleLog.DoesNotExist:
             return JsonResponse({'error': 'Post not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def add_comment(request, post_id):
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'User is not authenticated'}, status=401)
+
+        data = json.loads(request.body)
+        comment = data.get('comment', '')
+        print("comment: " + comment)
+        form = CommentForm({
+            'user_id': request.user.id,
+            'post_id': post_id,
+            'comment': comment,
+        })
+
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'message': 'Comment added successfully'}, status=201)
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def get_comments(request, post_id):
+    if request.method == 'GET':
+        try:
+            comments = Comment.objects.filter(post_id=post_id)
+            serialized_posts = [comment.to_dict() for comment in comments]
+            return JsonResponse(serialized_posts, safe=False)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     else:

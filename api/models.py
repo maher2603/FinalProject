@@ -124,7 +124,7 @@ class Comment(models.Model):
     date_posted = models.DateTimeField(default=now)
 
     def __str__(self):
-        return f"{self.user_id.username} - {self.date_posted}"
+        return f"{self.user_id.username} - {self.comment} - {self.date_posted}"
 
     def to_dict(self):
         return {
@@ -134,7 +134,6 @@ class Comment(models.Model):
             'post_id': self.post_id.id,
             'comment': self.comment,
             'date_posted': self.date_posted,
-            'replies': [reply.to_dict() for reply in self.reply_set.all().order_by('created_at')],
         }
     
 class Reply(models.Model):

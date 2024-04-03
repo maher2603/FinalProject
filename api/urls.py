@@ -23,6 +23,8 @@ urlpatterns = [
     path('get-posts/', views.get_posts, name='get_posts'),
     path('get-post/<int:post_id>/', views.get_post, name='get_post'),
     path('delete-post/<int:post_id>/', views.delete_post, name='delete_post'),
+    path('add-comment/<int:post_id>/', views.add_comment, name='add_comment'),
+    path('get-comments/<int:post_id>/', views.get_comments, name='get_comments'),
 ]
 
 if settings.DEBUG:
