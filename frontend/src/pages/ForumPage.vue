@@ -1,12 +1,26 @@
 <template>
-  <div class="home-page">
+  <div class="profile-page">
     <div class="container">
-      <div class="card">
-        <div class="card-header bg-dark text-white">
-          <h1 class="card-title">Forum</h1>
+      <div class="row justify-content-center">
+        <div class="col-md-4 col-lg-3 mb-4">
+          <div class="profile-container">
+            <div class="profile-header bg-gradient rounded-top">
+              <h2 class="profile-title text-black">Add Post</h2>
+            </div>
+            <div>
+              <AddPost class="form-control" />
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <p class="card-text">Chat to some pussios</p>
+        <div class="col-md-8 col-lg-9 mb-4">
+          <div class="profile-container">
+            <div class="profile-header bg-gradient rounded-top">
+              <h2 class="profile-title text-black">Forum</h2>
+            </div>
+            <div class="card-body">
+              <ViewPosts :userId="user.id" @view-post="viewPost" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -14,7 +28,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
+import ViewPosts from "@/components/ViewPosts.vue";
+import AddPost from "@/components/AddPost.vue";
 
 interface UserData {
   id: string | null;
@@ -25,6 +42,25 @@ interface UserData {
 }
 
 export default defineComponent({
+  components: {
+    ViewPosts,
+    AddPost,
+  },
+  setup() {
+    const postId = ref<number>(0);
+
+    const router = useRouter();
+
+    const viewPost = (id: number) => {
+      postId.value = id;
+      console.log({ postId: id });
+      router.push({ name: "Post Page", params: { postId: id } });
+    };
+
+    return {
+      viewPost,
+    };
+  },
   data() {
     return {
       user: {
@@ -61,30 +97,65 @@ export default defineComponent({
       }
     },
   },
+  props: {
+    userId: {
+      type: String,
+      required: true,
+    },
+  },
 });
 </script>
 
 <style scoped>
-.home-page {
-  padding-top: 5px;
+.profile-page {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.profile-info {
-  margin-top: 20px;
+.profile-container {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.profile-details {
-  display: flex;
-  align-items: center;
+.profile-header {
+  padding: 20px;
+  text-align: center;
+}
+
+.profile-title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.profile-body {
+  padding: 20px;
 }
 
 .profile-image {
-  margin-right: 20px;
-  width: 100px;
-  height: 100px;
+  border: 5px solid #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.profile-text {
-  flex-grow: 1;
+.btn-block {
+  border-radius: 25px;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: #fff;
+}
+
+.bg-gradient {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: #fff;
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 20px;
+  border: 0px;
+  background-color: #f9f9f900;
 }
 </style>

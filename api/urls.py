@@ -18,7 +18,11 @@ urlpatterns = [
     path('remove-vehicle/<int:vehicle_id>/', views.remove_vehicle, name='remove_vehicle'),
     path('add-vehicle-log/<int:vehicle_id>/', views.add_vehicle_log, name='add_vehicle_log'), 
     path('get-vehicle-logs/<int:vehicle_id>/', views.get_vehicle_logs, name='get_vehicle_logs'),
-    path('delete-vehicle-log/<int:log_id>/', views.delete_vehicle_log, name='delete_vehicle_log'),   
+    path('delete-vehicle-log/<int:log_id>/', views.delete_vehicle_log, name='delete_vehicle_log'),
+    path('add-post/', views.add_post, name='add_post'),  
+    path('get-posts/', views.get_posts, name='get_posts'),
+    path('get-post/<int:post_id>/', views.get_post, name='get_post'),
+    path('delete-post/<int:post_id>/', views.delete_post, name='delete_post'),
 ]
 
 if settings.DEBUG:

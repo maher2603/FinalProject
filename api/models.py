@@ -93,3 +93,66 @@ class VehicleLog(models.Model):
             'file_upload': self.file_upload,
         }
         return data
+    
+class Post(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=5000)
+    date_posted = models.DateTimeField(default=now)
+    image_upload = models.ImageField(upload_to='forum_images/', null=True, blank=True)
+    
+
+    def __str__(self):
+        return f"{self.user_id.username} - {self.title} - {self.date_posted}"
+    
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'user_id': self.user_id.id if self.user_id else None,
+            'username': self.user_id.username if self.user_id else None,
+            'title': self.title,
+            'description': self.description,
+            'date_posted': self.date_posted,
+            'image_upload': self.image_upload.url if self.image_upload else None, 
+        }
+        return data 
+
+class Comment(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    comment = models.CharField(max_length=500)
+    date_posted = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"{self.user_id.username} - {self.date_posted}"
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.user_id.username,
+            'user_id': self.user_id.to_dict(),
+            'post_id': self.post_id.id,
+            'comment': self.comment,
+            'date_posted': self.date_posted,
+            'replies': [reply.to_dict() for reply in self.reply_set.all().order_by('created_at')],
+        }
+    
+class Reply(models.Model):
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    reply = models.CharField(max_length=500)
+    date_posted = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"{self.user_id.username} - {self.date_posted} - Reply"
+
+    def to_dict(self):
+        return {
+            'id': str(self.id),
+            'username': self.user_id.username,
+            'user_id': str(self.user_id.id),
+            'comment_id': str(self.comment_id.id),
+            'post_id': str(self.comment_id.post_id.id),
+            'reply': self.reply,
+            'date_posted': self.date_posted,
+        }

@@ -1,13 +1,13 @@
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm
+from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import JsonResponse
 import json
 from django.http import HttpRequest, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Vehicle, VehicleLog
+from .models import Vehicle, VehicleLog, Post, Comment, Reply
 from django.contrib.auth.models import User
 import requests, datetime
 from django.utils.dateparse import parse_date
@@ -325,6 +325,94 @@ def delete_vehicle_log(request, log_id):
             return JsonResponse({'message': 'Log deleted successfully'}, status=200)
         except VehicleLog.DoesNotExist:
             return JsonResponse({'error': 'Log not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def add_post(request)  -> JsonResponse:
+    if request.method == 'POST':
+        print("Reached views.py")
+        if request.user.is_authenticated:
+            print("is authenticated")
+            print(request.POST)
+            try:
+                data = request.POST
+                images = request.FILES
+                print("past data")
+                print(data)
+                title = data.get('title', '')
+                description = data.get('description', '')
+                image_upload = images.get('image_upload', None)
+
+                print(image_upload)
+
+                form = PostForm({
+                    'user_id': request.user.id,
+                    'title': title,
+                    'description': description,
+                }, images)
+                print("after form")
+
+                if form.is_valid():
+                    form.save()
+                    return JsonResponse({'message': 'Post added successfully'}, status=201)
+                else:
+                    return JsonResponse({'errors': form.errors}, status=400)
+
+            except json.JSONDecodeError as e:
+                return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+
+            except ValueError as e:
+                return JsonResponse({'error': str(e)}, status=400) 
+            
+            except Exception as e:
+                return JsonResponse({'error': str(e)}, status=500)
+        else:
+            return JsonResponse({'error': 'User is not authenticated'}, status=401)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def get_posts(request):
+    if request.method == 'GET':
+        try:
+            posts = Post.objects.all()
+            serialized_posts = [post.to_dict() for post in posts]
+            return JsonResponse(serialized_posts, safe=False)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def get_post(request, post_id):
+    if request.method == 'GET':
+        try:
+            post = Post.objects.get(id=post_id)
+            serialized_posts = post.to_dict()
+            return JsonResponse(serialized_posts, safe=False)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def delete_post(request, post_id):
+    if request.method == 'DELETE':
+        try:
+            # Retrieve the post associated with the given post_id
+            post = Post.objects.get(id=post_id)
+            # Delete the post
+            post.delete()
+            return JsonResponse({'message': 'Post deleted successfully'}, status=200)
+        except VehicleLog.DoesNotExist:
+            return JsonResponse({'error': 'Post not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     else:
