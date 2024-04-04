@@ -99,7 +99,7 @@ export default defineComponent({
           // Parse response data as JSON
           const data = await response.json();
           this.post = data;
-          console.log(this.post);
+          // console.log(this.post);
         } else {
           console.error(
             "Failed to fetch vehicles data:",

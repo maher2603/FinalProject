@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm, CommentForm
+from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm, CommentForm, ReplyForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import JsonResponse
@@ -467,6 +467,62 @@ def delete_comment(request, comment_id):
             return JsonResponse({'message': 'Comment deleted successfully'}, status=200)
         except VehicleLog.DoesNotExist:
             return JsonResponse({'error': 'Comment not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def add_reply(request, comment_id):
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'User is not authenticated'}, status=401)
+
+        data = json.loads(request.body)
+        reply = data.get('reply', '')
+        print("reply: " + reply)
+        form = ReplyForm({
+            'user_id': request.user.id,
+            'comment_id': comment_id,
+            'reply': reply,
+        })
+
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'message': 'Reply added successfully'}, status=201)
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def get_replies(request, comment_id):
+    if request.method == 'GET':
+        try:
+            # print(Reply.objects.filter(comment_id=comment_id))
+            replies = Reply.objects.filter(comment_id=comment_id)
+            # print(replies)
+            serialized_posts = [reply.to_dict() for reply in replies]
+            return JsonResponse(serialized_posts, safe=False)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def delete_reply(request, reply_id):
+    if request.method == 'DELETE':
+        try:
+            # Retrieve the reply associated with the given reply_id
+            reply = Reply.objects.get(id=reply_id)
+            # Delete the reply
+            reply.delete()
+            return JsonResponse({'message': 'Reply deleted successfully'}, status=200)
+        except VehicleLog.DoesNotExist:
+            return JsonResponse({'error': 'Reply not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     else:

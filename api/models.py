@@ -143,7 +143,7 @@ class Reply(models.Model):
     date_posted = models.DateTimeField(default=now)
 
     def __str__(self):
-        return f"{self.user_id.username} - {self.date_posted} - Reply"
+        return f"{self.user_id.username} - {self.reply} - {self.date_posted} - Reply"
 
     def to_dict(self):
         return {

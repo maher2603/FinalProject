@@ -20,14 +20,55 @@
             <span class="date"
               ><span v-if="comment.user_id.id === user.id">
                 <button
-                  @click="deleteComment(comment.id)"
                   class="btn btn-remove"
+                  @click="deleteComment(comment.id)"
                 >
                   Delete
-                </button> </span
+                </button></span
               >{{ formattedDate(comment.date_posted) }}</span
             >
-            <span><button class="btn btn-reply">Reply</button></span>
+            <span>
+              <button
+                @click="toggleReplyForm(comment.id)"
+                class="btn btn-reply"
+              >
+                {{ showReplyForm[comment.id] ? "Cancel" : "Reply" }}
+              </button>
+            </span>
+            <div v-if="showReplyForm[comment.id]">
+              <form @submit.prevent="addReply(comment.id)">
+                <div class="input-group">
+                  <textarea
+                    v-model="newReply"
+                    class="form-control"
+                    rows="1"
+                    placeholder="Your reply"
+                  ></textarea>
+                  <button type="submit" class="btn btn-gradient">Submit</button>
+                </div>
+              </form>
+            </div>
+            <div
+              v-for="reply in replies[comment.id]"
+              :key="reply.id"
+              class="reply-item"
+            >
+              <div class="comment">
+                <span class="username">{{ reply.username }}</span>
+                :
+                {{ reply.reply }}
+                <span class="date"
+                  ><span v-if="reply.user_id == user.id">
+                    <button
+                      class="btn btn-remove"
+                      @click="deleteReply(reply.id)"
+                    >
+                      Delete
+                    </button></span
+                  >{{ formattedDate(reply.date_posted) }}</span
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -36,7 +77,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 
 interface UserData {
   id: string | null;
@@ -55,16 +96,45 @@ interface Comment {
   date_posted: string;
 }
 
+interface Reply {
+  id: number;
+  comment_id: string;
+  user_id: string;
+  username: string;
+  post_id: string;
+  reply: string;
+  date_posted: string;
+}
+
 export default defineComponent({
+  setup() {
+    const showReplyForm = reactive({} as Record<number, boolean>);
+    const replyText = reactive("");
+
+    const toggleReplyForm = (commentId: number) => {
+      showReplyForm[commentId] = !showReplyForm[commentId];
+    };
+    return {
+      showReplyForm,
+      replyText,
+      toggleReplyForm,
+    };
+  },
   data() {
     return {
       comments: {} as Comment,
       newComment: "",
       user: {} as UserData,
+      replies: {} as Reply,
+      newReply: "",
     };
   },
   mounted() {
-    this.getComments();
+    this.getComments().then(() => {
+      for (const comment of this.comments) {
+        this.getReplies(comment.id);
+      }
+    });
     this.fetchUserProfile();
   },
   methods: {
@@ -134,7 +204,6 @@ export default defineComponent({
           // Parse response data as JSON
           const data = await response.json();
           this.comments = data;
-          console.log(this.post);
         } else {
           console.error(
             "Failed to fetch comments:",
@@ -173,6 +242,91 @@ export default defineComponent({
         }
       }
     },
+    async addReply(commentId) {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/add-reply/${commentId}/`,
+          {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ reply: this.newReply }),
+          }
+        );
+        if (response.ok) {
+          this.newComment = "";
+          window.location.reload();
+        } else {
+          console.error(
+            "Failed to add comment:",
+            response.status,
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Error adding comment:", error);
+      }
+    },
+    async getReplies(commentId) {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/get-replies/${commentId}/`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        if (response.ok) {
+          // Parse response data as JSON
+          const data = await response.json();
+          // console.log("Replies fetched:", data);
+          // Find the comment by ID
+          const comment = this.comments.find(
+            (comment) => comment.id === commentId
+          );
+          // Check if the comment exists
+          if (comment) {
+            // Assign replies to the specific comment's replies property
+            this.replies[commentId] = data;
+          }
+          // console.log(this.replies[commentId]);
+        } else {
+          console.error(
+            "Failed to fetch replies:",
+            response.status,
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Error during fetch:", error);
+      }
+    },
+    async deleteReply(replyId: number) {
+      if (confirm("Are you sure you want to delete this comment?")) {
+        try {
+          const response = await fetch(
+            `http://localhost:8000/delete-reply/${replyId}/`,
+            {
+              method: "DELETE",
+              credentials: "include",
+            }
+          );
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            console.error(
+              "Failed to delete reply:",
+              response.status,
+              response.statusText
+            );
+          }
+        } catch (error) {
+          console.error("Error deleting reply:", error);
+        }
+      }
+    },
   },
   props: {
     postId: {
@@ -190,6 +344,11 @@ export default defineComponent({
 
 .comment-item {
   padding-bottom: 10px;
+}
+
+.reply-item {
+  padding-top: 10px;
+  padding-left: 20px;
 }
 
 .error {
@@ -280,7 +439,6 @@ export default defineComponent({
 .btn-remove {
   color: #c60000;
   font-size: small;
-  padding-top: 0px;
   padding-left: 0px;
 }
 </style>

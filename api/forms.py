@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import Vehicle, VehicleLog, Post, Comment
+from .models import Vehicle, VehicleLog, Post, Comment, Reply
 
 User = get_user_model()
 
@@ -41,3 +41,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields= {'user_id', 'post_id', 'comment'}
+    
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
+        fields= {'user_id', 'comment_id', 'reply'}

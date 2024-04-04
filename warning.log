@@ -1656,3 +1656,21 @@ Internal Server Error: /get-comments/9/
 Internal Server Error: /get-comments/9/
 Not Found: /get-comments/undefined/
 Not Found: /get-comments/undefined/
+Bad Request: /add-comment/2/
+Internal Server Error: /get-replies/9/
+Internal Server Error: /get-replies/9/
+Internal Server Error: /get-replies/9/
+Internal Server Error: /get-replies/9/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Not Found: /get-replies/undefined/
+Internal Server Error: /get-comments/9/
+Internal Server Error: /get-comments/9/
+Internal Server Error: /get-comments/9/
+Internal Server Error: /get-comments/9/
+Internal Server Error: /get-comments/9/
