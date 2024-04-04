@@ -14,7 +14,21 @@
       </form>
       <div class="comments-list">
         <div v-for="comment in comments" :key="comment.id" class="comment-item">
-          <div>{{ comment.username }} : {{ comment.comment }}</div>
+          <div class="comment">
+            <span class="username">{{ comment.username }}</span> :
+            {{ comment.comment }}
+            <span class="date"
+              ><span v-if="comment.user_id.id === user.id">
+                <button
+                  @click="deleteComment(comment.id)"
+                  class="btn btn-remove"
+                >
+                  Delete
+                </button> </span
+              >{{ formattedDate(comment.date_posted) }}</span
+            >
+            <span><button class="btn btn-reply">Reply</button></span>
+          </div>
         </div>
       </div>
     </div>
@@ -23,6 +37,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+interface UserData {
+  id: string | null;
+  username: string;
+  email: string;
+  dob: string;
+  profileImage: string | null;
+}
 
 interface Comment {
   id: number;
@@ -35,12 +57,43 @@ interface Comment {
 
 export default defineComponent({
   data() {
-    return { comments: {} as Comment, newComment: "" };
+    return {
+      comments: {} as Comment,
+      newComment: "",
+      user: {} as UserData,
+    };
   },
   mounted() {
     this.getComments();
+    this.fetchUserProfile();
   },
   methods: {
+    async fetchUserProfile() {
+      try {
+        const response = await fetch("http://localhost:8000/user-api/", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          const userData = (await response.json()) as UserData;
+          this.user = userData;
+          if (userData.profileImage) {
+            userData.profileImage = `http://localhost:8000/${userData.profileImage}`;
+          }
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("There was an error during fetch:", error);
+      }
+    },
+
+    formattedDate(date_posted: string): string {
+      if (!date_posted) return "";
+      const date = new Date(date_posted);
+      return date.toLocaleString();
+    },
     async addComment() {
       try {
         const response = await fetch(
@@ -93,6 +146,33 @@ export default defineComponent({
         console.error("Error during fetch:", error);
       }
     },
+    async deleteComment(commentId: number) {
+      if (confirm("Are you sure you want to delete this comment?")) {
+        try {
+          const response = await fetch(
+            `http://localhost:8000/delete-comment/${commentId}/`,
+            {
+              method: "DELETE",
+              credentials: "include",
+            }
+          );
+          if (response.ok) {
+            // window.location.reload();
+            this.comments = this.comments.filter(
+              (comment) => comment.id !== commentId
+            );
+          } else {
+            console.error(
+              "Failed to delete post:",
+              response.status,
+              response.statusText
+            );
+          }
+        } catch (error) {
+          console.error("Error deleting post:", error);
+        }
+      }
+    },
   },
   props: {
     postId: {
@@ -107,6 +187,11 @@ export default defineComponent({
 .comments-list {
   padding: 10px;
 }
+
+.comment-item {
+  padding-bottom: 10px;
+}
+
 .error {
   padding-top: 20px;
   color: red;
@@ -120,6 +205,17 @@ export default defineComponent({
 .btn-gradient {
   background: linear-gradient(to right, #ff416c, #ff4b2b);
   color: #fff;
+}
+
+.btn-reply {
+  text-decoration: underline;
+  font-size: small;
+  padding-top: 0px;
+  padding-right: 5px;
+}
+
+.comment {
+  padding-bottom: 0px;
 }
 
 .bg-gradient {
@@ -167,5 +263,24 @@ export default defineComponent({
 
 .image-upload-text.image-selected {
   color: white;
+}
+
+.username {
+  font-size: medium;
+  font-weight: bold;
+  color: rgb(107, 107, 107);
+}
+
+.date {
+  font-size: x-small;
+  color: rgb(107, 107, 107);
+  float: right;
+}
+
+.btn-remove {
+  color: #c60000;
+  font-size: small;
+  padding-top: 0px;
+  padding-left: 0px;
 }
 </style>

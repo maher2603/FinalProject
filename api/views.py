@@ -454,3 +454,20 @@ def get_comments(request, post_id):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+@csrf_exempt
+@login_required
+def delete_comment(request, comment_id):
+    if request.method == 'DELETE':
+        try:
+            # Retrieve the comment associated with the given comment_id
+            comment = Comment.objects.get(id=comment_id)
+            # Delete the comment
+            comment.delete()
+            return JsonResponse({'message': 'Comment deleted successfully'}, status=200)
+        except VehicleLog.DoesNotExist:
+            return JsonResponse({'error': 'Comment not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
