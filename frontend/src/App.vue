@@ -58,9 +58,11 @@
 
     <!-- Main content area -->
     <main class="container-fluid flex-grow-1 p-0">
-      <div class="scrollable-content" style="overflow-y: auto">
-        <router-view></router-view>
-      </div>
+      <router-view v-slot="{ Component }">
+        <transition name="slide" mode="out-in">
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
     </main>
   </div>
 </template>
@@ -84,9 +86,19 @@ export default defineComponent({
 .bg-theme {
   background-color: hsl(0, 0%, 8%);
 }
-/* Style for the scrollable content */
-.scrollable-content {
-  /* Remove padding-bottom to fill the height completely */
-  flex-grow: 1; /* Expand to fill available space */
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 1s, transform 1s;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
 }
 </style>

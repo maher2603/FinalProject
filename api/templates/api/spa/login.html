@@ -18,7 +18,6 @@
       .bg-theme {
         background-color: #141414;
       }
-      /* Modern styling for the login form */
       .container-full {
         width: 100vw; /* Set container width to full viewport width */
         padding-left: 0;
@@ -116,6 +115,9 @@
         <div class="card">
           <div class="card-body">
             <h2 class="card-title">Login</h2>
+            {% if error_message %}
+            <div class="alert alert-danger">{{ error_message }}</div>
+            {% endif %}
             <form method="post">
               {% csrf_token %}
               <div class="form-group">

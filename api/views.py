@@ -53,8 +53,13 @@ def login_view(request):
                     return redirect('main_spa')  # Redirect to the main page if 'next' is not provided
             else:
                 # Invalid username or password
-                return render(request, 'api/spa/login.html', {'form': form, 'error': 'Invalid username or password'})
+                error_message = 'Invalid username or password. Please try again.'
+        else:
+            # Form is invalid, render login page with form and error message
+            error_message = 'Invalid username or password. Please try again.'
+        return render(request, 'api/spa/login.html', {'form': form, 'error_message': error_message})
     else:
+        # GET request, render login page with empty form
         form = AuthenticationForm()
         # Pass the 'next' parameter to the login template
         return render(request, 'api/spa/login.html', {'form': form, 'next': request.GET.get('next', '')})

@@ -1674,3 +1674,49 @@ Internal Server Error: /get-comments/9/
 Internal Server Error: /get-comments/9/
 Internal Server Error: /get-comments/9/
 Internal Server Error: /get-comments/9/
+Internal Server Error: /api/accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view api.views.login_view didn't return an HttpResponse object. It returned None instead.
+Internal Server Error: /api/accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view api.views.login_view didn't return an HttpResponse object. It returned None instead.
+Internal Server Error: /api/accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view api.views.login_view didn't return an HttpResponse object. It returned None instead.
+Internal Server Error: /api/accounts/login/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view api.views.login_view didn't return an HttpResponse object. It returned None instead.
+Not Found: /background1.mp4
+Not Found: /background1.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4
+Not Found: /background2.mp4

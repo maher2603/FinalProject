@@ -10,6 +10,10 @@
     />
     <style>
       /* Additional CSS styles */
+      .navbar {
+        position: relative;
+        z-index: 1;
+      }
       .navbar-brand {
         font-size: 1.5rem;
         font-weight: bold;
@@ -19,17 +23,17 @@
       }
       /* Animated background */
       body {
-        overflow: hidden;
+        overflow: auto;
         position: relative;
         background-color: #141414;
-        animation: changeColor 10s infinite alternate;
+        animation: changeColor 5s infinite alternate;
       }
       @keyframes changeColor {
         0% {
           background-color: #141414;
         }
         50% {
-          background-color: #333;
+          background-color: #fff;
         }
         100% {
           background-color: #141414;
@@ -40,6 +44,8 @@
         padding: 100px 0;
         text-align: center;
         color: #fff;
+        position: relative;
+        z-index: 1;
       }
       .main-content h1 {
         font-size: 3rem;
@@ -51,10 +57,25 @@
       }
       /* Description section */
       .description-section {
-        background-color: #f8f9fa; /* Light gray background */
+        background-color: #f8f9fa;
         padding: 50px 0;
         text-align: center;
-        height: 100vh; /* Make section fill viewport height */
+        height: 100vh;
+        position: relative;
+        z-index: 1;
+      }
+      .video-overlay {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        height: 30%;
+        background: linear-gradient(
+          to bottom,
+          hsl(0, 0%, 8%),
+          rgba(0, 0, 0, 0) 100%
+        );
+        z-index: 0;
       }
     </style>
   </head>
@@ -94,10 +115,11 @@
     </nav>
     <!-- Main content area -->
     <div class="container">
+      <div class="video-overlay"></div>
       <div class="row justify-content-center main-content">
         <div class="col-md-8">
-          <h1>Welcome to Whips&Gigs</h1>
-          <p>Your destination for all things vehicles!</p>
+          <h1>Welcome to Whips & Gigs</h1>
+          <p>Manage your fleet and have a laugh!</p>
         </div>
       </div>
     </div>
@@ -107,15 +129,36 @@
         <div class="row">
           <div class="col-md-12">
             <h2>What We Offer</h2>
+            <p>An easy and convenient way to manage your vehicle information</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-              tincidunt sit amet odio vitae bibendum. Duis dignissim lacus eget
-              dolor dictum, et malesuada felis condimentum.
+              Support for multiple vehicles all of varieties so you can manage
+              an entire fleet
             </p>
             <p>
-              Nullam id quam ac quam aliquet auctor. Proin eget risus vitae urna
-              laoreet mattis in at velit. Phasellus porttitor gravida libero,
-              non scelerisque sapien porttitor at.
+              Up to date and accurate vehicle information sourced directly from
+              the Driver and Vehicle Licensing Agency
+            </p>
+            <p>
+              A platform to meet and engage with other members of our community
+            </p>
+            <br />
+            <h2>How to get started</h2>
+            <p>If you're yet to make an account, what are you waiting for?</p>
+            <p>
+              Sign up or Log in using the buttons on the navigation bar to gain
+              full access
+            </p>
+            <p>
+              Once you're logged in, head over to Garage to start adding your
+              vehicles using our easy search tool
+            </p>
+            <p>
+              Check out the forum to see what other members of the community and
+              getting up to.
+            </p>
+            <p>
+              Keep your details updated over at your profile page so you never
+              miss a reminder
             </p>
           </div>
         </div>
