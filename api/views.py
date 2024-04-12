@@ -132,10 +132,12 @@ def add_vehicle(request):
                 print("Year:", year_of_manufacture)
 
                 try:
-                    tax_due_date = parse_date(tax_due_date_str)
                     mot_expiry_date = parse_date(mot_expiry_date_str)
                 except ValueError as e:
                     return JsonResponse({'error': str(e)}, status=400)
+
+                # Set tax_due_date to None if not provided
+                tax_due_date = parse_date(tax_due_date_str) if tax_due_date_str else None
 
                 print("User:", request.user)
                 print("Engine:", engine_capacity)
@@ -207,7 +209,28 @@ def get_vehicles(request: HttpRequest) -> JsonResponse:
             vehicles = Vehicle.objects.filter(user_id=request.user)
             # Convert queryset to list of dictionaries
             #print(vehicles) #for debugging
-            vehicle_data = [vehicle.to_dict() for vehicle in vehicles]
+            vehicle_data = []
+
+            for vehicle in vehicles:
+                # Create a dictionary with vehicle data
+                vehicle_dict = {
+                    'id': vehicle.id,
+                    'registration_number': vehicle.registration_number,
+                    'make': vehicle.make,
+                    'colour': vehicle.colour,
+                    'year_of_manufacture': vehicle.year_of_manufacture,
+                    'fuel_type': vehicle.fuel_type,
+                    'engine_capacity': vehicle.engine_capacity,
+                    'tax_status': vehicle.tax_status,
+                    'mot_status': vehicle.mot_status,
+                    'mot_expiry_date': vehicle.mot_expiry_date,
+                }
+
+                # Include tax_due_date only if it's not None
+                if vehicle.tax_due_date is not None:
+                    vehicle_dict['tax_due_date'] = vehicle.tax_due_date
+                
+                vehicle_data.append(vehicle_dict)
             # Return the list of vehicle data as a JSON response
             #print(vehicle_data) #for debugging
             return JsonResponse(vehicle_data, safe=False)  # Set safe=False for serialization of lists

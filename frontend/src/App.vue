@@ -27,6 +27,12 @@
           id="navbarNav"
         >
           <ul class="navbar-nav">
+            <!-- Dashboard link -->
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'Dashboard Page' }"
+                >Dashboard</router-link
+              >
+            </li>
             <!-- Forum Page link -->
             <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'Forum Page' }"

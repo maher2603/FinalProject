@@ -13,7 +13,7 @@
         <div class="row justify-content-center main-content">
           <div class="col-md-8 text-center">
             <h1 class="welcome-text">Welcome to Whips & Gigs</h1>
-            <p class="sub-text">Manage your fleet and have a laugh!</p>
+            <p class="sub-text">Manage your cars and have a laugh!</p>
           </div>
         </div>
       </div>

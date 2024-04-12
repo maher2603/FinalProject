@@ -18,6 +18,9 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('username', 'email', 'dob', 'password1', 'password2')
 
 class VehicleForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['tax_due_date'].required = False
     class Meta:
         model = Vehicle
         fields = ['user_id', 'registration_number', 'make', 'colour', 'year_of_manufacture', 'fuel_type', 'engine_capacity', 'tax_status', 'tax_due_date', 'mot_status', 'mot_expiry_date']

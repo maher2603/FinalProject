@@ -9,6 +9,7 @@ import VehiclePage from "../pages/VehiclePage.vue";
 import LogPage from "../pages/LogPage.vue";
 import ForumPage from "../pages/ForumPage.vue";
 import PostPage from "../pages/PostPage.vue";
+import DashboardPage from "../pages/DashboardPage.vue";
 
 let base =
   import.meta.env.MODE == "development" ? import.meta.env.BASE_URL : "";
@@ -23,6 +24,7 @@ const router = createRouter({
     { path: "/garage/logs/:vehicleId", name: "Log Page", component: LogPage },
     { path: "/forum/", name: "Forum Page", component: ForumPage },
     { path: "/forum/post/:postId", name: "Post Page", component: PostPage },
+    { path: "/dashboard", name: "Dashboard Page", component: DashboardPage },
   ],
 });
 

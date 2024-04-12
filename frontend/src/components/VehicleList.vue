@@ -84,7 +84,7 @@ interface Vehicle {
   fuel_type: string;
   engine_capacity: number;
   tax_status: string;
-  tax_due_date: string;
+  tax_due_date?: string;
   mot_status: string;
   mot_expiry_date: string;
 }

@@ -47,7 +47,7 @@ class Vehicle(models.Model):
     fuel_type = models.CharField(max_length=50)
     engine_capacity = models.IntegerField()
     tax_status = models.CharField(max_length=50)
-    tax_due_date = models.DateField()
+    tax_due_date = models.DateField(null=True, blank=True)
     mot_status = models.CharField(max_length=50)
     mot_expiry_date = models.DateField()
 
