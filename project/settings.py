@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'corsheaders',
+    'google.oauth2.credentials',
+    'google_auth_oauthlib.flow',
+    'google.auth.transport.requests',
+    'googleapiclient.discovery',
 ]
 
 MIDDLEWARE = [

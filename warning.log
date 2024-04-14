@@ -1815,3 +1815,687 @@ Traceback (most recent call last):
     return self.connection.commit()
 django.db.utils.IntegrityError: FOREIGN KEY constraint failed
 Internal Server Error: /get-vehicles/
+Not Found: /send_email
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 35, in get_gmail_service
+    flow = InstalledAppFlow.from_client_secrets_file(
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google_auth_oauthlib\flow.py", line 198, in from_client_secrets_file
+    with open(client_secrets_file, "r") as json_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'credentials.json'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: '/'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields refresh_token, client_secret, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields refresh_token, client_secret, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields refresh_token, client_secret, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, refresh_token, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, refresh_token, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 35, in get_gmail_service
+    flow = InstalledAppFlow.from_client_secrets_file(
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google_auth_oauthlib\flow.py", line 198, in from_client_secrets_file
+    with open(client_secrets_file, "r") as json_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'credentials.json'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields refresh_token, client_secret, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, refresh_token, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, refresh_token, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, client_id, refresh_token.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, refresh_token, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, refresh_token, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, refresh_token, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, refresh_token, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, refresh_token, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, refresh_token, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, refresh_token, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields refresh_token, client_id, client_secret.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_id, client_secret, refresh_token.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields client_secret, refresh_token, client_id.
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 82, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 48, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 539, in from_authorized_user_file
+    return cls.from_authorized_user_info(data, scopes)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 486, in from_authorized_user_info
+    raise ValueError(
+ValueError: Authorized user info was not in the expected format, missing fields refresh_token, client_secret, client_id.
+Not Found: /get_gmail_service
+Internal Server Error: /get_gmail_service
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: get_gmail_service() takes 0 positional arguments but 1 was given
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 33, in get_gmail_service
+    creds = flow.run_local_server(port=0)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google_auth_oauthlib\flow.py", line 455, in run_local_server
+    self.fetch_token(
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google_auth_oauthlib\flow.py", line 285, in fetch_token
+    return self.oauth2session.fetch_token(self.client_config["token_uri"], **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\requests_oauthlib\oauth2_session.py", line 271, in fetch_token
+    self._client.parse_request_uri_response(
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\oauthlib\oauth2\rfc6749\clients\web_application.py", line 220, in parse_request_uri_response
+    response = parse_authorization_code_response(uri, state=state)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\oauthlib\oauth2\rfc6749\parameters.py", line 281, in parse_authorization_code_response
+    raise_from_error(params.get('error'), params)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\oauthlib\oauth2\rfc6749\errors.py", line 399, in raise_from_error
+    raise cls(**kwargs)
+oauthlib.oauth2.rfc6749.errors.AccessDeniedError: (access_denied) 
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 35, in get_gmail_service
+    with open(TOKEN_PATH, 'w') as token:
+FileNotFoundError: [Errno 2] No such file or directory: 'path/to/your/token.json'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 35, in get_gmail_service
+    with open(TOKEN_PATH, 'w') as token:
+OSError: [Errno 22] Invalid argument: 'api\token.json'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 35, in get_gmail_service
+    with open(TOKEN_PATH, 'w') as token:
+OSError: [Errno 22] Invalid argument: 'api\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 77, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 29, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 80, in send_email
+    return HttpResponse('Email sent successfully.')
+NameError: name 'HttpResponse' is not defined
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 78, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 44, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 30, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 78, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 44, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 30, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 78, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 44, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 36, in get_gmail_service
+    with open(TOKEN_PATH, 'w') as token:
+FileNotFoundError: [Errno 2] No such file or directory: ''
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 78, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 44, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 30, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 79, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 46, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 32, in get_gmail_service
+    creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\google\oauth2\credentials.py", line 537, in from_authorized_user_file
+    with io.open(filename, "r", encoding="utf-8") as json_file:
+PermissionError: [Errno 13] Permission denied: 'api\\tokens'
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 84, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 51, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 36, in get_gmail_service
+    if os.path.exists(TOKEN_PATH):
+NameError: name 'TOKEN_PATH' is not defined
+Internal Server Error: /send_email
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 84, in send_email
+    send_email_with_gmail(sender_email, recipient_email, subject, message)
+  File "C:\Users\maher\FinalProject\api\views.py", line 51, in send_email_with_gmail
+    service = get_gmail_service()
+  File "C:\Users\maher\FinalProject\api\views.py", line 43, in get_gmail_service
+    with open(TOKEN_PATH, 'w') as token:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\maher\\FinalProject\\tokens\\gmail_token.json'
+Not Found: /send_email/
+Not Found: /send_email/
+Not Found: /send_email/
+Not Found: /send-email/
+Not Found: /send-email/
+Not Found: /send-email/
+Forbidden (Origin checking failed - http://localhost:5173 does not match any trusted origins.): /send-email/
+Forbidden (Origin checking failed - http://localhost:5173 does not match any trusted origins.): /send-email/
+Forbidden (Origin checking failed - http://localhost:5173 does not match any trusted origins.): /send-email/
+Forbidden (Origin checking failed - http://localhost:5173 does not match any trusted origins.): /send-email/
+Internal Server Error: /send-email/
+Traceback (most recent call last):
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\maher\miniconda3\envs\webdev_env\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\maher\FinalProject\api\views.py", line 78, in send_email
+    print(request.POST.get(message))
+UnboundLocalError: local variable 'message' referenced before assignment
+Bad Request: /send-email/
+Bad Request: /send-email/
+Bad Request: /send-email/
+Bad Request: /send-email/
+Bad Request: /send-email/

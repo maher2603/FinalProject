@@ -105,6 +105,14 @@ export default defineComponent({
             tax_due_date: vehicle.tax_due_date,
             tax_status: vehicle.tax_status,
           });
+
+          if (diffDays === 30) {
+            this.sendEmailReminder(
+              vehicle.registration_number,
+              "MOT Expiry",
+              diffDays
+            );
+          }
         }
       });
 
@@ -123,6 +131,14 @@ export default defineComponent({
             tax_due_date: vehicle.tax_due_date,
             tax_status: vehicle.tax_status,
           });
+
+          if (diffDays === 321) {
+            this.sendEmailReminder(
+              vehicle.registration_number,
+              "Tax Due",
+              diffDays
+            );
+          }
         }
       });
 
@@ -158,6 +174,36 @@ export default defineComponent({
         }
       } catch (error) {
         console.error("Error during fetch:", error);
+      }
+    },
+    async sendEmailReminder(
+      registrationNumber: string,
+      eventType: string,
+      remainingDays: number
+    ) {
+      try {
+        // Make API request to Django backend to send email
+        const response = await fetch("http://localhost:8000/send-email/", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: `Your vehicle ${registrationNumber} has ${eventType} in ${remainingDays} days.`,
+          }),
+        });
+        if (response.ok) {
+          console.log("Email sent successfully.");
+        } else {
+          console.error(
+            "Failed to send email:",
+            response.status,
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Error sending email:", error);
       }
     },
   },
@@ -232,7 +278,7 @@ export default defineComponent({
   color: #c60000;
 }
 
-.valid {
+/* .valid {
   color: #008a15;
-}
+} */
 </style>

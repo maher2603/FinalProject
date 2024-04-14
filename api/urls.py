@@ -29,6 +29,7 @@ urlpatterns = [
     path('add-reply/<int:comment_id>/', views.add_reply, name='add_reply'),
     path('get-replies/<int:comment_id>/', views.get_replies, name='get_replies'),
     path('delete-reply/<int:reply_id>/', views.delete_reply, name='delete_reply'),
+    path('send-email/', views.send_email, name='send_email'),
 ]
 
 if settings.DEBUG:

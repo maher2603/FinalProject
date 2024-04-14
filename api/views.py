@@ -1,18 +1,104 @@
+import json, requests, os, base64
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm, CommentForm, ReplyForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import JsonResponse
-import json
-from django.http import HttpRequest, JsonResponse
+from django.conf import settings
+from django.http import HttpRequest, JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Vehicle, VehicleLog, Post, Comment, Reply
 from django.contrib.auth.models import User
-import requests, datetime
 from django.utils.dateparse import parse_date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+from email.mime.text import MIMEText
+
+
+# Function to obtain Gmail API service
+
+# Gmail API scopes
+SCOPES = ['https://www.googleapis.com/auth/gmail.send']
+TOKEN_DIR = os.path.join(settings.BASE_DIR, 'tokens')
+TOKEN_PATH = os.path.join(TOKEN_DIR, 'gmail_token.json')
+CLIENT_SECRET_PATH = os.path.join('api', 'credentials.json')
+
+def get_gmail_service():
+    creds = None
+
+    if os.path.exists(TOKEN_PATH):
+        creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)
+
+    if not creds or not creds.valid:
+        flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_PATH, SCOPES)
+        creds = flow.run_local_server(port=0)
+
+        with open(TOKEN_PATH, 'w') as token:
+            token.write(creds.to_json())
+
+    service = build('gmail', 'v1', credentials=creds)
+    return service
+
+# Function to send email using Gmail API
+def send_email_with_gmail(sender, to, subject, message):
+    service = get_gmail_service()
+
+    message = create_message(sender, to, subject, message)
+    send_message(service, 'me', message)
+
+# Function to create email message
+def create_message(sender, to, subject, message_text):
+    message = MIMEText(message_text)
+    message['to'] = to
+    message['from'] = sender
+    message['subject'] = subject
+    raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
+    return {'raw': raw_message}
+
+# Function to send message using Gmail API
+def send_message(service, user_id, message):
+    try:
+        message = (service.users().messages().send(userId=user_id, body=message)
+                   .execute())
+        print('Message Id: %s' % message['id'])
+        return message
+    except Exception as e:
+        print('An error occurred: %s' % e)
+        return None
+
+# Django view to send email
+@csrf_exempt
+@login_required
+def send_email(request):
+    if request.method == 'POST':
+        print('Reached POST request handling...')
+        sender_email = 'whipsandgigs@gmail.com'
+        recipient_email = request.user.email  # Assuming request.user is authenticated
+        subject = 'Whips & Gigs Vehicle Reminder'
+
+        # Retrieve the POST data as JSON and load it into a Python dictionary
+        try:
+            data = json.loads(request.body)
+            message = data.get('message')
+        except json.JSONDecodeError as e:
+            print(f'Error decoding JSON: {e}')
+            return HttpResponse('Invalid JSON data', status=400)
+
+        if message:
+            print('Sending email...')
+            send_email_with_gmail(sender_email, recipient_email, subject, message)
+            return HttpResponse('Email sent successfully.')
+        else:
+            print('Message not provided in POST data.')
+            return HttpResponse('Message not provided', status=400)
+    else:
+        print('Method not allowed.')
+        return HttpResponse('Method not allowed', status=405)
 
 
 def main_spa(request: HttpRequest) -> HTTPResponse:
