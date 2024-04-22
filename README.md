@@ -11,3 +11,6 @@ To start the backend, run the following command:
 
 To start the frontend, run the following command:
 'npm install' then 'npm run dev' in the frontend directory
+
+References:
+background1.mp4 - sourced from Pexels - free to use - https://www.pexels.com/video/time-lapse-video-of-traffic-1860079/
