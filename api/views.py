@@ -1,5 +1,5 @@
 import json, requests, os, base64, pytz
-from datetime import datetime, timedelta
+from datetime import datetime
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, VehicleForm, VehicleLogForm, PostForm, CommentForm, ReplyForm
@@ -29,10 +29,12 @@ CLIENT_SECRET_PATH = os.path.join('api', 'credentials.json')
 
 
 def main_spa(request: HttpRequest) -> HTTPResponse:
+    """ Django view to load base webpage """
     return render(request, 'base.html', {})
 
 @csrf_exempt
 def signup_view(request):
+    """ Django view to sign up user """
     if request.user.is_authenticated:
         return redirect('main_spa')
 
@@ -50,6 +52,7 @@ def signup_view(request):
 
 @csrf_exempt
 def login_view(request):
+    """ Django view to log in user """
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -74,23 +77,27 @@ def login_view(request):
 
 @csrf_exempt
 def logout_view(request):
+    """ Django view to log user out using redirect to login page """
     auth_logout(request)
     return redirect('login')
 
 @csrf_exempt
 @login_required
 def user_id_information(request, user_id):
+    """ Django view to fetch user information """
     getUser = User.objects.get(id=user_id)
     return JsonResponse(getUser.to_dict())
 
 @csrf_exempt
 @login_required
 def user_api(request):
+    """ Django view to return current logged in user """
     return JsonResponse(request.user.to_dict())
 
 @csrf_exempt
 @login_required
 def update_user_profile(request):
+    """ Django view to update user profile"""
     if request.method == 'PUT':
         try:
             data = json.loads(request.body)
@@ -111,6 +118,7 @@ def update_user_profile(request):
 
 @csrf_exempt
 def add_vehicle(request):
+    """ Django view to add a vehicle to the account of the logged-in user"""
     if request.method == 'POST':
         if request.user.is_authenticated:
             # print("Received data:", request.body)
@@ -174,6 +182,7 @@ def add_vehicle(request):
 
 @csrf_exempt
 def vehicle_search(request):
+    """ Django view to search for a vehicle using the DVLA VES API """
     if request.method == 'POST':
         url = "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles"
         headers = {
@@ -191,9 +200,7 @@ def vehicle_search(request):
 @csrf_exempt
 @login_required
 def get_vehicles(request: HttpRequest) -> JsonResponse:
-    """
-    Retrieves all vehicles associated with the logged-in user.
-    """
+    """ Django view to retrieve all vehicles associated with the logged-in user """
     if request.method == 'GET':
         try:
 
@@ -227,9 +234,7 @@ def get_vehicles(request: HttpRequest) -> JsonResponse:
 @csrf_exempt
 @login_required
 def get_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
-    """
-    Retrieves all vehicles associated with the logged-in user.
-    """
+    """ Django view to retrieve a single vehicle associated with the logged-in user """
     if request.method == 'GET':
         try:
             vehicles = Vehicle.objects.filter(user_id=request.user, id=vehicle_id)
@@ -241,13 +246,11 @@ def get_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
-    
+  
 @csrf_exempt
 @login_required
 def remove_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
-    """
-    Removes the specified vehicle associated with the logged-in user.
-    """
+    """ Django view to remove a vehicle associated with the logged-in user """
     if request.method == 'DELETE':
         try:
             vehicle = Vehicle.objects.get(user_id=request.user, id=vehicle_id)
@@ -263,6 +266,7 @@ def remove_vehicle(request: HttpRequest, vehicle_id: int) -> JsonResponse:
 @csrf_exempt
 @login_required
 def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
+    """ Django view to add a vehicle log """
     if request.method == 'POST':
         # print("Reached views.py")
         if request.user.is_authenticated:
@@ -312,6 +316,7 @@ def add_vehicle_log(request, vehicle_id: int)  -> JsonResponse:
 @csrf_exempt
 @login_required
 def get_vehicle_logs(request, vehicle_id):
+    """ Django view to get all vehicle logs """
     if request.method == 'GET':
         try:
             logs = VehicleLog.objects.filter(vehicle_id=vehicle_id).values('id', 'title', 'date', 'cost', 'description', 'file_upload')
@@ -324,6 +329,7 @@ def get_vehicle_logs(request, vehicle_id):
 @csrf_exempt
 @login_required
 def delete_vehicle_log(request, log_id):
+    """ Django view to delete a vehicle log """
     if request.method == 'DELETE':
         try:
             log = VehicleLog.objects.get(id=log_id)
@@ -339,6 +345,7 @@ def delete_vehicle_log(request, log_id):
 @csrf_exempt
 @login_required
 def add_post(request)  -> JsonResponse:
+    """ Django view to add a post to the forum """
     if request.method == 'POST':
         # print("Reached views.py")
         if request.user.is_authenticated:
@@ -378,6 +385,7 @@ def add_post(request)  -> JsonResponse:
 @csrf_exempt
 @login_required
 def get_posts(request):
+    """ Django view to get all posts """
     if request.method == 'GET':
         try:
             posts = Post.objects.all()
@@ -391,6 +399,7 @@ def get_posts(request):
 @csrf_exempt
 @login_required
 def get_post(request, post_id):
+    """ Django view to get a post """
     if request.method == 'GET':
         try:
             post = Post.objects.get(id=post_id)
@@ -404,6 +413,7 @@ def get_post(request, post_id):
 @csrf_exempt
 @login_required
 def delete_post(request, post_id):
+    """ Django view to delete a post """
     if request.method == 'DELETE':
         try:
             post = Post.objects.get(id=post_id)
@@ -419,6 +429,7 @@ def delete_post(request, post_id):
 @csrf_exempt
 @login_required
 def add_comment(request, post_id):
+    """ Django view to add a comment to a post """
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({'error': 'User is not authenticated'}, status=401)
@@ -442,6 +453,7 @@ def add_comment(request, post_id):
 @csrf_exempt
 @login_required
 def get_comments(request, post_id):
+    """ Django view to get comments """
     if request.method == 'GET':
         try:
             comments = Comment.objects.filter(post_id=post_id)
@@ -455,6 +467,7 @@ def get_comments(request, post_id):
 @csrf_exempt
 @login_required
 def delete_comment(request, comment_id):
+    """ Django view to delete a comment """
     if request.method == 'DELETE':
         try:
             comment = Comment.objects.get(id=comment_id)
@@ -470,6 +483,7 @@ def delete_comment(request, comment_id):
 @csrf_exempt
 @login_required
 def add_reply(request, comment_id):
+    """ Django view to add a reply to a comment """
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return JsonResponse({'error': 'User is not authenticated'}, status=401)
@@ -493,6 +507,7 @@ def add_reply(request, comment_id):
 @csrf_exempt
 @login_required
 def get_replies(request, comment_id):
+    """ Django view to get replies """
     if request.method == 'GET':
         try:
             # print(Reply.objects.filter(comment_id=comment_id))
@@ -508,6 +523,7 @@ def get_replies(request, comment_id):
 @csrf_exempt
 @login_required
 def delete_reply(request, reply_id):
+    """ Django view to delete a reply"""
     if request.method == 'DELETE':
         try:
             reply = Reply.objects.get(id=reply_id)
@@ -520,10 +536,10 @@ def delete_reply(request, reply_id):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
     
-# Django view to send email
 @csrf_exempt
 @login_required
 def send_email(request):
+    """ Django view to send email """
     if request.method == 'POST':
         print('Reached POST request handling...')
         sender_email = 'whipsandgigs@gmail.com'
@@ -547,10 +563,10 @@ def send_email(request):
         print('Method not allowed.')
         return HttpResponse('Method not allowed', status=405)
     
-# Django view to send scheduled email
 @login_required
 @csrf_exempt
 def send_email_scheduled(request):
+    """  Django view to send scheduled email """
     if request.method == 'POST':
         data = json.loads(request.body)
         recipient_email = request.user.email
@@ -575,9 +591,9 @@ def send_email_scheduled(request):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
 
-# Django view to create email task
 @shared_task
 def send_email_task(recipient_email, subject, message):
+    """ Django view to create email task """
     try:
         sender_email = 'whipsandgigs@gmail.com'
         send_email_with_gmail(sender_email, recipient_email, subject, message)
@@ -585,8 +601,8 @@ def send_email_task(recipient_email, subject, message):
     except Exception as e:
         logger.error(f"Failed to send email to {recipient_email}: {str(e)}")
 
-# Django view to obtain Gmail API service
 def get_gmail_service():
+    """ Django view to obtain Gmail API service """
     creds = None
 
     if os.path.exists(TOKEN_PATH):
@@ -602,15 +618,15 @@ def get_gmail_service():
     service = build('gmail', 'v1', credentials=creds)
     return service
 
-# Django view to send email using Gmail API
 def send_email_with_gmail(sender, to, subject, message):
+    """  Django view to send email using Gmail API """
     service = get_gmail_service()
 
     message = create_message(sender, to, subject, message)
     send_message(service, 'me', message)
 
-# Django view to create email message
 def create_message(sender, to, subject, message_text):
+    """ Django view to create email message """
     message = MIMEText(message_text)
     message['to'] = to
     message['from'] = sender
@@ -618,8 +634,8 @@ def create_message(sender, to, subject, message_text):
     raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
     return {'raw': raw_message}
 
-# Django view to send message using Gmail API
 def send_message(service, user_id, message):
+    """ Django view to send message using Gmail API """
     try:
         message = (service.users().messages().send(userId=user_id, body=message)
                    .execute())
