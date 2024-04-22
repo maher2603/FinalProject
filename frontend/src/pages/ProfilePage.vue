@@ -41,14 +41,14 @@
                     />
                   </div>
                   <div class="mb-3">
-                    <div v-if="user.profileImage" class="mt-2">
+                    <!-- <div v-if="user.profileImage" class="mt-2">
                       <img
                         :src="user.profileImage"
                         width="150"
                         height="150"
                         class="profile-image rounded-circle"
                       />
-                    </div>
+                    </div> -->
                   </div>
                   <button
                     type="submit"
