@@ -10,7 +10,8 @@ To start the backend, run the following command:
 'python manage.py runserver' in the root directory
 
 To start the frontend, run the following command:
-'npm install' then 'npm run dev' in the frontend directory
+'npm install' in the frontend directory which will install the node_modules folder
+Then run 'npm run dev' also in the frontend directory
 
 References:
 background1.mp4 - sourced from Pexels - free to use - https://www.pexels.com/video/time-lapse-video-of-traffic-1860079/
