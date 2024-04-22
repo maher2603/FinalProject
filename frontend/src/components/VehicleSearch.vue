@@ -141,21 +141,17 @@ export default {
           this.$emit("vehicle-added", this.searchResult);
           this.registrationNumber = "";
           this.searchResult = null;
-          // Reload the page
           window.location.reload();
         } catch (error) {
           this.error = "Failed to add vehicle";
         }
       } else {
-        // Handle case where searchResult is null
         console.error("searchResult is null");
       }
     },
 
     showVehicle() {
-      // Emit an event to pass the search result to the parent component
       this.$emit("vehicle-added", this.searchResult);
-      // Reset input and search result
       this.registrationNumber = "";
       this.searchResult = null;
     },

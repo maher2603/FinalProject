@@ -1,6 +1,5 @@
 <template>
   <div class="event-list">
-    <!-- Display events sorted by date -->
     <div v-if="sortedEvents.length > 0">
       <div v-for="event in sortedEvents" :key="event.id" class="event-item">
         <div class="event-details">
@@ -39,7 +38,6 @@
       </div>
     </div>
 
-    <!-- Display message if no upcoming events -->
     <p v-else class="start-text">No upcoming events found.</p>
   </div>
 </template>
@@ -90,7 +88,6 @@ export default defineComponent({
 
       const today = new Date();
 
-      // Collect MOT expiry events
       this.vehicles.forEach((vehicle) => {
         if (vehicle.mot_expiry_date && vehicle.tax_due_date) {
           const expiryDate = new Date(vehicle.mot_expiry_date);
@@ -109,14 +106,13 @@ export default defineComponent({
           if (diffDays === 30) {
             this.sendEmailReminder(
               vehicle.registration_number,
-              "MOT Expiry",
+              "MOT expires",
               diffDays
             );
           }
         }
       });
 
-      // Collect Tax due events
       this.vehicles.forEach((vehicle) => {
         if (vehicle.tax_due_date) {
           const dueDate = new Date(vehicle.tax_due_date);
@@ -132,17 +128,16 @@ export default defineComponent({
             tax_status: vehicle.tax_status,
           });
 
-          if (diffDays === 321) {
+          if (diffDays === 30) {
             this.sendEmailReminder(
               vehicle.registration_number,
-              "Tax Due",
+              "Tax is due",
               diffDays
             );
           }
         }
       });
 
-      // Sort events by remaining days (from soonest to latest)
       events.sort((a, b) => a.remainingDays - b.remainingDays);
 
       return events;
@@ -151,19 +146,47 @@ export default defineComponent({
   mounted() {
     // Call getVehicles method when the component is mounted
     this.getVehicles();
+    // this.vehicles.forEach((vehicle) => {
+    //   if (vehicle.mot_expiry_date && vehicle.tax_due_date) {
+    //     const today = new Date();
+    //     const reminderDays = 30;
+    //     const expiryDate = new Date(vehicle.mot_expiry_date);
+    //     const taxDueDate = new Date(vehicle.tax_due_date);
+    //     const diffTimeMot = expiryDate.getTime() - today.getTime();
+    //     const diffTimeTax = taxDueDate.getTime() - today.getTime();
+    //     const diffDaysMot = Math.ceil(diffTimeMot / (1000 * 60 * 60 * 24));
+    //     const diffDaysTax = Math.ceil(diffTimeTax / (1000 * 60 * 60 * 24));
+    //     const scheduleMot = diffDaysMot - reminderDays;
+    //     const scheduleTax = diffDaysTax - reminderDays;
+
+    //     if (diffDaysMot >= 30) {
+    //       this.scheduleEmailReminder(
+    //         vehicle.registration_number,
+    //         "MOT expires",
+    //         scheduleMot
+    //       );
+    //     }
+
+    //     if (diffDaysTax >= 30) {
+    //       this.scheduleEmailReminder(
+    //         vehicle.registration_number,
+    //         "Tax is due",
+    //         scheduleTax
+    //       );
+    //     }
+    //   }
+    // });
+    // console.log("Component mounted");
   },
   methods: {
     async getVehicles() {
       try {
-        // Fetch vehicles data from the backend API
         const response = await fetch("http://localhost:8000/get-vehicles/", {
           method: "GET",
           credentials: "include",
         });
         if (response.ok) {
-          // Parse response data as JSON
           const data = await response.json();
-          // Emit a custom event to pass the fetched vehicles data to the parent component
           this.$emit("update-vehicles", data);
         } else {
           console.error(
@@ -176,13 +199,53 @@ export default defineComponent({
         console.error("Error during fetch:", error);
       }
     },
+    // async scheduleEmailReminder(
+    //   registrationNumber: string,
+    //   eventType: string,
+    //   scheduledDays: number
+    // ) {
+    //   try {
+    //     const today = new Date();
+    //     const sendDate = new Date(
+    //       today.getTime() + scheduledDays * 24 * 60 * 60 * 1000
+    //     );
+
+    //     const requestBody = {
+    //       message: `Your vehicle ${registrationNumber}'s ${eventType} in 30 days.`,
+    //       sendDate: sendDate.toISOString(),
+    //     };
+
+    //     console.log("Request Body:", requestBody); // Log request body for debugging
+
+    //     const response = await fetch("http://localhost:8000/send-email/", {
+    //       method: "POST",
+    //       credentials: "include",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(requestBody),
+    //     });
+
+    //     if (response.ok) {
+    //       console.log("Email reminder scheduled successfully.");
+    //     } else {
+    //       const errorResponse = await response.json(); // Parse error response if available
+    //       console.error(
+    //         "Failed to schedule email reminder:",
+    //         response.status,
+    //         errorResponse
+    //       );
+    //     }
+    //   } catch (error) {
+    //     console.error("Error scheduling email reminder:", error);
+    //   }
+    // },
     async sendEmailReminder(
       registrationNumber: string,
       eventType: string,
       remainingDays: number
     ) {
       try {
-        // Make API request to Django backend to send email
         const response = await fetch("http://localhost:8000/send-email/", {
           method: "POST",
           credentials: "include",
@@ -190,7 +253,7 @@ export default defineComponent({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            message: `Your vehicle ${registrationNumber} has ${eventType} in ${remainingDays} days.`,
+            message: `Your vehicle ${registrationNumber}'s ${eventType} in ${remainingDays} days.`,
           }),
         });
         if (response.ok) {
@@ -277,8 +340,4 @@ export default defineComponent({
 .expired {
   color: #c60000;
 }
-
-/* .valid {
-  color: #008a15;
-} */
 </style>

@@ -107,15 +107,12 @@ export default defineComponent({
   methods: {
     async getVehicles() {
       try {
-        // Fetch vehicles data from the backend API
         const response = await fetch("http://localhost:8000/get-vehicles/", {
           method: "GET",
           credentials: "include",
         });
         if (response.ok) {
-          // Parse response data as JSON
           const data = await response.json();
-          // Emit a custom event to pass the fetched vehicles data to the parent component
           this.$emit("update-vehicles", data);
         } else {
           console.error(
@@ -131,22 +128,18 @@ export default defineComponent({
     removeVehicle(index: number) {
       const vehicleToRemove = this.vehicles[index];
 
-      // Display a confirmation dialog before proceeding with deletion
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this vehicle?"
       );
 
       if (confirmDelete) {
-        // If user confirms deletion, send a DELETE request to the backend API to remove the vehicle
         fetch(`http://localhost:8000/remove-vehicle/${vehicleToRemove.id}/`, {
           method: "DELETE",
           credentials: "include",
         })
           .then((response) => {
             if (response.ok) {
-              // If the request is successful, emit an event to notify the parent component
               this.$emit("vehicle-removed", index);
-              // Reload the page
               window.location.reload();
             } else {
               console.error(

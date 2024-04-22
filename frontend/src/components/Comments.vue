@@ -279,16 +279,12 @@ export default defineComponent({
           }
         );
         if (response.ok) {
-          // Parse response data as JSON
           const data = await response.json();
           // console.log("Replies fetched:", data);
-          // Find the comment by ID
           const comment = this.comments.find(
             (comment) => comment.id === commentId
           );
-          // Check if the comment exists
           if (comment) {
-            // Assign replies to the specific comment's replies property
             this.replies[commentId] = data;
           }
           // console.log(this.replies[commentId]);

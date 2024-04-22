@@ -6,7 +6,7 @@
       >
     </div>
     <label class="switch">
-      <input type="checkbox" @click="toggleCheckbox" />
+      <input type="checkbox" @click="" />
       <div class="slider round"></div>
     </label>
     <div class="loading" v-if="loading">
@@ -18,7 +18,16 @@
   </div>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+export default {
+  data() {
+    return {
+      loading: false,
+      error: "",
+    };
+  },
+};
+</script>
 
 <style scoped>
 .error {

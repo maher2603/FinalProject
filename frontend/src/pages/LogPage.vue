@@ -86,7 +86,6 @@ export default defineComponent({
   methods: {
     async getVehicle() {
       try {
-        // Fetch vehicles data from the backend API
         const response = await fetch(
           `http://localhost:8000/get-vehicle/${this.vehicleId}/`,
           {
@@ -95,7 +94,6 @@ export default defineComponent({
           }
         );
         if (response.ok) {
-          // Parse response data as JSON
           const data = await response.json();
           this.vehicle = data;
           console.log(this.vehicle);

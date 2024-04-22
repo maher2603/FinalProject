@@ -78,7 +78,6 @@ export default {
   background-color: #141414;
   animation: changeColor 10s infinite alternate;
 }
-
 .main-content {
   position: relative;
   z-index: 1;
@@ -94,13 +93,11 @@ export default {
   font-size: 1.5rem;
   margin-bottom: 40px;
 }
-/* Description section */
 .description-section {
   background-color: #f8f9fa;
   padding: 50px 0;
   text-align: center;
 }
-
 .video {
   width: 100%;
   height: 100%;
@@ -110,7 +107,6 @@ export default {
   left: 0;
   filter: brightness(60%);
 }
-
 .video-overlay {
   position: absolute;
   top: 0;

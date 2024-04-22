@@ -94,12 +94,10 @@ export default defineComponent({
       const allowedExtensions = ["pdf", "jpg", "jpeg", "png"];
       const extension = file.name.split(".").pop().toLowerCase();
 
-      // Check if the selected file has an allowed extension
       if (!allowedExtensions.includes(extension)) {
         alert("Only .pdf, .jpg, .jpeg, or .png files are allowed.");
-        // Clear the input value to prevent submitting the form with an invalid file
         event.target.value = "";
-        this.file_upload = null; // Reset file_upload
+        this.file_upload = null;
         return;
       }
 
@@ -132,7 +130,6 @@ export default defineComponent({
         );
 
         if (response.ok) {
-          // Parse response data as JSON
           console.log(response);
           window.location.reload();
         } else {
@@ -143,7 +140,6 @@ export default defineComponent({
           );
         }
 
-        // Reset form fields
         this.title = "";
         this.date = "";
         this.cost = "";

@@ -3,6 +3,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-4 col-lg-3 mb-4">
+          <!-- AddPost component to allow user to add forum post -->
           <div class="profile-container">
             <div class="profile-header bg-gradient rounded-top">
               <h2 class="profile-title text-black">Add Post</h2>
@@ -13,6 +14,7 @@
           </div>
         </div>
         <div class="col-md-8 col-lg-9 mb-4">
+          <!-- ViewPosts component to display all forum posts -->
           <div class="profile-container">
             <div class="profile-header bg-gradient rounded-top">
               <h2 class="profile-title text-black">Forum</h2>

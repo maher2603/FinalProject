@@ -1,8 +1,8 @@
-// Example of how to use Vue Router
+// Vue Router to switch between pages
 
 import { createRouter, createWebHistory } from "vue-router";
 
-// 1. Define route components.
+// Define route components.
 import MainPage from "../pages/MainPage.vue";
 import ProfilePage from "../pages/ProfilePage.vue";
 import VehiclePage from "../pages/VehiclePage.vue";
@@ -14,7 +14,7 @@ import DashboardPage from "../pages/DashboardPage.vue";
 let base =
   import.meta.env.MODE == "development" ? import.meta.env.BASE_URL : "";
 
-// 2. Define some routes
+// Define routes
 const router = createRouter({
   history: createWebHistory(base),
   routes: [

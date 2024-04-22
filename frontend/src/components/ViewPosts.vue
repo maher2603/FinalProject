@@ -100,7 +100,6 @@ export default defineComponent({
             }
           );
           if (response.ok) {
-            // Remove the deleted post from the UI
             this.posts = this.posts.filter((post) => post.id !== postId);
           } else {
             console.error(

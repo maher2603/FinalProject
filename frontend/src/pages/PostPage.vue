@@ -28,6 +28,7 @@
           </div>
         </div>
         <div class="col-md-4 col-lg-6 mb-4">
+          <!-- Comments component to display forum comments -->
           <div class="profile-container">
             <div class="profile-header bg-gradient rounded-top">
               <h2 class="profile-title text-black">Comments</h2>
@@ -96,7 +97,6 @@ export default defineComponent({
           }
         );
         if (response.ok) {
-          // Parse response data as JSON
           const data = await response.json();
           this.post = data;
           // console.log(this.post);

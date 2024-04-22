@@ -3,15 +3,12 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-theme">
       <div class="container">
-        <!-- Navbar brand -->
         <router-link
           class="nav-link navbar-brand fw-bold"
           style="font-size: x-large"
           :to="{ name: 'Main Page' }"
           >Whips & Gigs</router-link
         >
-
-        <!-- Navbar toggler -->
         <button
           class="navbar-toggler"
           type="button"
@@ -20,8 +17,6 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- Navbar links -->
         <div
           class="collapse navbar-collapse justify-content-end"
           id="navbarNav"
@@ -62,7 +57,7 @@
       </div>
     </nav>
 
-    <!-- Main content area -->
+    <!-- Main content -->
     <main class="container-fluid flex-grow-1 p-0">
       <router-view v-slot="{ Component }">
         <transition name="slide" mode="out-in">

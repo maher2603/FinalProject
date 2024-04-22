@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import User, Vehicle, VehicleLog, Post, Comment, Reply
 
-# Register your models here.
+# Registering models
 admin.site.register(User)
 admin.site.register(Vehicle)
 admin.site.register(VehicleLog)

@@ -1,3 +1,5 @@
+#Forms used to save data to tables
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
@@ -29,8 +31,7 @@ class VehicleLogForm(forms.ModelForm):
     class Meta:
         model = VehicleLog
         fields = ['vehicle_id', 'title', 'date', 'cost', 'description', 'file_upload']
-        
-    # file_upload = forms.FileField()
+
     widgets = {'file_upload': forms.FileInput(attrs={'required': False})}
 
 class PostForm(forms.ModelForm):

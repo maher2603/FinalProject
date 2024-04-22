@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Whips&Gigs{% endblock %}</title>
-    <!-- Bootstrap CSS CDN -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <style>
-      /* Additional CSS styles */
       .navbar-brand {
         font-size: 1.5rem;
         font-weight: bold;
@@ -21,12 +19,12 @@
       html,
       body {
         width: 100%;
-        overflow-x: hidden; /* Prevent horizontal scrolling */
+        overflow-x: hidden;
       }
 
       .container-full {
         width: 100%;
-        max-width: 100%; /* Ensure the container doesn't exceed the viewport width */
+        max-width: 100%;
         padding-left: 15px;
         padding-right: 15px;
       }
@@ -34,7 +32,7 @@
       .login-content {
         padding-top: 50px;
         max-width: 400px;
-        margin: 0 auto; /* Center the content horizontally */
+        margin: 0 auto;
       }
       .card {
         border: none;
@@ -230,12 +228,10 @@
 
     <footer class="footer bg-burgundy text-white mt-4">
       <div class="container text-center py-3">
-        <!-- Footer content here -->
         &copy; {{ current_year }} Whips&Gigs
       </div>
     </footer>
 
-    <!-- Bootstrap JS and its dependencies (Optional, if I want Bootstrap's interactive components, like the collapsible navbar) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -245,7 +241,7 @@
         var password2 = document.getElementById("password2").value;
         var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
-        var commonPasswords = ["password", "123456", "qwerty", "abc123"]; // List of common passwords
+        var commonPasswords = ["password", "123456", "qwerty", "abc123"];
 
         // Check if password2 matches password1
         if (password1 !== password2) {
@@ -273,13 +269,13 @@
           return false;
         }
 
-        // Check if password is entirely numeric
+        // Check if password is all numbers
         if (!isNaN(password1)) {
           alert("Your password can't be entirely numeric.");
           return false;
         }
 
-        return true; // Form submission allowed if all conditions are met
+        return true;
       }
     </script>
   </body>

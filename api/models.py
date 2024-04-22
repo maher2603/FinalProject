@@ -1,3 +1,5 @@
+#Database models
+
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.models import AbstractUser
@@ -7,7 +9,6 @@ class User(AbstractUser):
     dob = models.DateField(default=now, null=True)
     profileImage = models.ImageField(null=True, blank=True)
 
-    # Add related names to avoid clashes with auth.User
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_groups',
@@ -39,6 +40,7 @@ class User(AbstractUser):
         return data
 
 class Vehicle(models.Model):
+    """Vehicle model"""
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     registration_number = models.CharField(max_length=20)
     make = models.CharField(max_length=100)
@@ -72,6 +74,7 @@ class Vehicle(models.Model):
         return data
     
 class VehicleLog(models.Model):
+    """Vehicle Log model"""
     vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     date = models.DateField()
@@ -95,6 +98,7 @@ class VehicleLog(models.Model):
         return data
     
 class Post(models.Model):
+    """Post model"""
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=5000)
@@ -118,6 +122,7 @@ class Post(models.Model):
         return data 
 
 class Comment(models.Model):
+    """Comment model"""
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     comment = models.CharField(max_length=500)
@@ -137,6 +142,7 @@ class Comment(models.Model):
         }
     
 class Reply(models.Model):
+    """Reply model"""
     comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     reply = models.CharField(max_length=500)

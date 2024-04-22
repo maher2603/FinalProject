@@ -63,7 +63,7 @@ export default defineComponent({
         (total, log) => total + parseFloat(String(log.cost)),
         0
       );
-      return total.toFixed(2); // Round to two decimal places
+      return total.toFixed(2);
     },
   },
   async mounted() {
@@ -114,7 +114,6 @@ export default defineComponent({
             }
           );
           if (response.ok) {
-            // Remove the deleted log from the UI
             this.logs = this.logs.filter((log) => log.id !== logId);
           } else {
             console.error(

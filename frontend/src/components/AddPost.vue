@@ -73,12 +73,10 @@ export default defineComponent({
       const allowedExtensions = ["jpg", "jpeg", "png"];
       const extension = image.name.split(".").pop().toLowerCase();
 
-      // Check if the selected image has an allowed extension
       if (!allowedExtensions.includes(extension)) {
         alert("Only .jpg, .jpeg, or .png files are allowed.");
-        // Clear the input value to prevent submitting the form with an invalid image
         event.target.value = "";
-        this.image_upload = null; // Reset image_upload
+        this.image_upload = null;
         return;
       }
 
@@ -106,7 +104,6 @@ export default defineComponent({
         });
 
         if (response.ok) {
-          // Parse response data as JSON
           console.log(response);
           window.location.reload();
         } else {
@@ -117,7 +114,6 @@ export default defineComponent({
           );
         }
 
-        // Reset form fields
         this.title = "";
         this.description = "";
         this.image_upload = null;
